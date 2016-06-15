@@ -1,0 +1,13 @@
+<table border="1">
+  <tr>
+    <td>Codigo</td><td>Descripcion</td><td>Precio</td>
+  </tr>
+  
+<!-- Se recorre el listado de articulos, y por cada articulo se saca su descripcion y su precio -->
+{{#each articulos}}
+  <tr>  
+     <td>{{codigo}} </td> <td>{{descripcion}}</td> <td>{{precio}}</td>
+  </tr>   
+{{/each}}
+</table>
+<a href="/">Retornar</a>

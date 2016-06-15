@@ -1,0 +1,20 @@
+1. Express: Framework NODEJS
+2. Expres Generator: Es el mismo Express pero con una estructuracion de archivos 
+                     diferente (un poco mas entendible pero no modificable),
+                     mientras que con Express solo uno puede organizarlo segun 
+                     los gustos
+
+    Estructura proyecto: 
+        bin: Donde se encuentra el ejecutable del server
+        node_modules: Donde quedan instalados los modulos adicionales
+        public: Donde van los js imagenes y css
+        routes: Donde se implementan la logia de negocio
+        views: Vistas que quedan a la espera de los resultados del route
+        app.js: Configuracion del proyecto
+        package.json: Instalacion de modulos
+
+
+3. Para iniciar el express generator es : 
+    ***Si esta configurado el package.json npm start
+    ***Si no esta configurado node app.js
+    *** Si no seria node bin/www

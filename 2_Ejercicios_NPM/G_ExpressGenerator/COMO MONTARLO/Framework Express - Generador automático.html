@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<!-- saved from url=(0088)http://www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=19&codigo=19&inicio=15 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Framework Express - Generador automático</title>
+
+<meta name="keywords" content="c++, programación, tutorial, nodejs">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de NodeJS.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="./Framework Express - Generador automático_files/principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>19 - Framework Express - Generador automático</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script async="" src="./Framework Express - Generador automático_files/analytics.js"></script><script src="./Framework Express - Generador automático_files/ca-pub-4669394804436935.js"></script><script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript" src="./Framework Express - Generador automático_files/show_ads.js">
+</script><ins id="aswift_0_expand" style="display:inline-table;border:none;height:250px;margin:0;padding:0;position:relative;visibility:visible;width:300px;background-color:transparent"><ins id="aswift_0_anchor" style="display:block;border:none;height:250px;margin:0;padding:0;position:relative;visibility:visible;width:300px;background-color:transparent"><iframe width="300" height="250" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;" src="./Framework Express - Generador automático_files/saved_resource.html"></iframe></ins></ins>
+
+</div> 
+
+<p>El creador del framework Express ha implementado una aplicación (también esta aplicación está escrita en Node.js) que tiene por objetivo crear una estructura mínima de un proyecto que utilice Express (un conjunto de carpetas y archivos)</p>
+<p>Si bien esto no es obligatorio como vimos en conceptos anteriores es muy beneficioso conocerla para que nosotros podamos definir como queremos organizar los archivos de un proyecto grande.</p>
+<p>El primer paso será instalar la aplicación 'express-generator'.</p>
+<p>La aplicación 'express-generator' se ejecuta desde la consola de nuestro sistema operativo y no es un módulo que se instala en una aplicación particular. Para instalar una aplicación en Node.js que se la pueda ejecutar desde la linea de comandos también utilizamos el 'npm' pero le pasamos un parámetro extra '-g' (global), instalemos el programa express-generator:</p>
+<pre>npm install express-generator -g
+</pre>
+<p>Es muy importante no olvidarse del parámetro -g</p>
+
+<p>Ahora que tenemos la aplicación 'express-generator' nos posicionamos en el directorio 'c:\ejerciciosnodejs' (o el directorio donde esta almacenando todos sus proyectos) y procederemos a crear nuestra primer aplicación Node.js utilizando Express y su generador de código:</p>
+<pre>c:\ejerciciosnodejs&gt; express ejercicio21 --hbs
+</pre>
+<p>Estamos llamando al programa que acabamos de instalar que se llama 'express' y le pasamos dos parámetros, el primero indica el nombre de nuestro proyecto y el segundo el sistema de plantillas que utilizaremos para generar nuestras páginas dinámicas.</p>
+<p>Ya tenemos creado la carpeta ejercicio21 y dentro de esta una serie de archivos y subcarpetas:</p>
+<pre>  ejercicio21
+    app.js
+    package.json
+    bin
+      www
+    public
+      images
+      javascripts
+      stylesheets
+    router
+      index.js
+      users.js
+    views
+      error.hbs
+      index.hbs
+      layout.hbs
+</pre>
+     
+<p>Si observamos dentro de todas las carpetas que ha creado el generador de código 'express' no aparece la carpeta 'node_modules'. Es decir que todavía nos hace falta instalar el framework Express. Aquí es donde entra a jugar este nuevo archivo llamado package.json.</p>
+<p>Si abrimos este archivo package.json:</p>
+<pre>{
+  "name": "ejercicio21",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.13.2",
+    "cookie-parser": "~1.3.5",
+    "debug": "~2.2.0",
+    "express": "~4.13.1",
+    "hbs": "~3.1.0",
+    "morgan": "~1.6.1",
+    "serve-favicon": "~2.3.0"
+  }
+}  
+</pre>
+<p>"name": Indicamos el nombre de proyecto</p>
+<p>"version": Indicamos la versión del proyecto.</p>
+<p>"start": Indicamos el archivo que se debe ejecutar para arrancar el proyecto</p>
+<p>"dependencies": Indicamos todos los otros módulos que se requieren en nuestro proyecto.</p>
+
+<p>Como podemos observar en "dependencies" aparece el framework 'express' y el módulo 'body-parser' que hemos utilizado en conceptos anteriores.</p>
+
+<p>Ahora veremos que podemos instalar todos estos módulos con un único comando, nos posicionamos en el directorio ejercicio21 y ejecutamos:</p>
+<pre>c:\ejerciciosnodejs\ejercicio21&gt;npm install
+</pre>
+<p>Cuando llamamos a 'npm install' sin ningún otro parámetro lo que hace es buscar el archivo 'package.json' y proceder a instalar todos los módulos especificados en la propiedad 'dependencies'.</p>
+<p>Ahora ya tenemos creado la carpeta 'node_modules' con las 7 carpetas que coinciden con las dependencias especificadas en el archivo json:</p>
+<pre>    body-parser
+    cookie-parser
+    debug
+    express
+    hbs
+    morgan
+    serve-favicon
+</pre>
+
+<p>Podemos ejecutar nuestra aplicación mínima creada con el 'express-generador':</p>
+<pre>c:\ejerciciosnodejs\ejercicio21&gt;node ./bin/www
+</pre>
+<p>Tener en cuenta que el generador define como puerto el valor 3000 y no el 8888 que utilizamos en ejemplos anteriores.</p>
+<p>Y ya podemos solicitar al servidor la página raíz del sitio (por el puerto 3000):</p>
+<p><img src="./Framework Express - Generador automático_files/foto064.jpg" border="0" alt="express-generator express node.js"></p>
+<p>Ahora podemos ver otra forma de iniciar a nuestro proyecto en Node.js cuando definimos el archivo package.json:</p>
+<p>En lugar de escribir:</p>
+<pre>c:\ejerciciosnodejs\ejercicio21&gt;node ./bin/www
+</pre>
+<p>Escribimos:</p>
+<pre>c:\ejerciciosnodejs\ejercicio21&gt;npm start
+</pre>
+<p>Recordemos que en el archivo json hay una propiedad start donde definimos el archivo que inicia nuestra aplicación:</p>
+<pre>  "scripts": {
+    "start": "node ./bin/www"
+  },
+</pre>
+
+
+<p>Hasta aquí hemos visto todo lo que podemos hacer en forma automática, en conceptos sucesivos veremos cada uno de los archivos y carpetas fundamentales para organizar un proyecto Node.js con 'Express'.</p>
+
+
+<p>Este proyecto  lo puede descargar en un zip con todos los archivos desde este enlace :
+<a href="http://www.javascriptya.com.ar/nodejsya/proyectos/ejercicio21.zip">ejercicio21</a></p>
+
+
+<h2><a href="http://www.javascriptya.com.ar/nodejsya/index.php?inicio=15">Retornar</a></h2> 
+
+<table width="700px">
+<tbody><tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript" src="./Framework Express - Generador automático_files/show_ads.js">
+</script><ins id="aswift_1_expand" style="display:inline-table;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:336px;background-color:transparent"><ins id="aswift_1_anchor" style="display:block;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:336px;background-color:transparent"><iframe width="336" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;" src="./Framework Express - Generador automático_files/saved_resource(1).html"></iframe></ins></ins>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript" src="./Framework Express - Generador automático_files/show_ads.js">
+</script><ins id="aswift_2_expand" style="display:inline-table;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:336px;background-color:transparent"><ins id="aswift_2_anchor" style="display:block;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:336px;background-color:transparent"><iframe width="336" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_2" name="aswift_2" style="left:0;position:absolute;top:0;" src="./Framework Express - Generador automático_files/saved_resource(2).html"></iframe></ins></ins>
+
+</td>
+</tr>
+</tbody></table>
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-35', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+</body></html>
