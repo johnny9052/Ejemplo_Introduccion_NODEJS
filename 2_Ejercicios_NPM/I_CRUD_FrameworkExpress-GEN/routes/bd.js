@@ -1,13 +1,13 @@
-var mysql=require('mysql');
+var mysql = require('mysql');
 
-var conexion=mysql.createConnection({
-    host:'localhost',
-    user:'root',
-    password:'admin',
-    database:'base1'
+var conexion = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'admin',
+    database: 'base1'
 });
 
-conexion.connect(function (error){
+conexion.connect(function (error) {
     if (error)
         console.log('Problemas de conexion con mysql');
     else
@@ -15,4 +15,4 @@ conexion.connect(function (error){
 });
 
 
-module.exports=conexion;
+module.exports = conexion;

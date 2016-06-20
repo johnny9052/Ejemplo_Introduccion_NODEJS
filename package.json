@@ -11,5 +11,9 @@
     "author": "Johnny",
     "contributors": [
     ],
-    "dependencies": {}
+    "dependencies": {},
+    "scripts": {
+        "start": "node app.js"
+    }
+
 }

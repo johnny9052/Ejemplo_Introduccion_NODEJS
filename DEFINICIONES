@@ -4,6 +4,8 @@
                      mientras que con Express solo uno puede organizarlo segun 
                      los gustos
 
+    Instalar express generator: $ npm install express-generator -g
+
     Estructura proyecto: 
         bin: Donde se encuentra el ejecutable del server
         node_modules: Donde quedan instalados los modulos adicionales
@@ -13,8 +15,20 @@
         app.js: Configuracion del proyecto
         package.json: Instalacion de modulos
 
+    Configurar node en netbeans
+        C:\Program Files\nodejs\node.exe
+        C:\Program Files\nodejs\npm.cmd
+        C:\Users\Johnny\AppData\Roaming\npm\express.cmd
+
 
 3. Para iniciar el express generator es : 
     ***Si esta configurado el package.json npm start
     ***Si no esta configurado node app.js
     *** Si no seria node bin/www
+
+
+
+4. NO ACTUALIZAR EL SERVIDOR A CADA INSTANTE
+        Instalacion npm install -g nodemon
+        Uso nodemos nombreArchivo.js
+        
