@@ -1,2 +1,2 @@
-l�nea 1
-L�nea 2
+linea 1
+Linea 2

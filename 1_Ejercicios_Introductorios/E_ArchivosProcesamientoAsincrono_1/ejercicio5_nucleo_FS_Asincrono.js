@@ -1,13 +1,9 @@
-//Modulo file system para la creacion de archivos. 
-var fs = require('fs');
+/*Con el ./ se indica que el archivo que se va a necesitar se encuentra en la 
+ * misma carpeta, ademas cuando no se coloca esto NODE busca en su nucleo dicho
+ * repositorio */
+var funciones = require('./funciones');
 
 
-//(nombre archivo, contenido del archivo, funcion que se ejecuta cuando termina la creacion del archivo)
-fs.writeFile('./archivo1.txt', 'linea 1\nLinea 2', function (error) {
-    if (error)
-        console.log(error);
-    else
-        console.log('El archivo fue creado');
-});
-
+funciones.crearArchivo();
+/*Con esta linea vemos que el proceso es asincrono*/
 console.log('Ultima linea del programa');

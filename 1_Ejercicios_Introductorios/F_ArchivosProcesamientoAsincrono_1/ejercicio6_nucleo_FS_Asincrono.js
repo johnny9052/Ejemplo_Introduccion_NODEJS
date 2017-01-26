@@ -1,15 +1,10 @@
-var fs=require('fs');
+/*Con el ./ se indica que el archivo que se va a necesitar se encuentra en la 
+ * misma carpeta, ademas cuando no se coloca esto NODE busca en su nucleo dicho
+ * repositorio */
+var funciones = require('./funciones');
 
-function leer(error,datos){
-    if (error) {
-        console.log(error);
-    }	
-    else {
-        console.log(datos.toString());
-    }
-}
 
-/*Ruta del archivo a leer, funcion que se ejecuta cuando lo lee*/
-fs.readFile('./archivo1.txt',leer);
+funciones.iniciarLectura();
 
-console.log('última línea del programa');
+/*Con esta linea se evidencia el proceso asincrono*/
+console.log('Ultima linea del programa');

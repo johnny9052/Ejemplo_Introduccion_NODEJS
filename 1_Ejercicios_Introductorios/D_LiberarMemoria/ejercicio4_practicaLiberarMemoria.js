@@ -1,12 +1,19 @@
-var os=require('os');
 
-console.log('La memoria disponible es :'+os.freemem());
+/*Con el ./ se indica que el archivo que se va a necesitar se encuentra en la 
+ * misma carpeta, ademas cuando no se coloca esto NODE busca en su nucleo dicho
+ * repositorio */
+var funciones = require('./funciones');
 
 
-var vec = new Array();
+funciones.memoriaDisponible();
+funciones.llenarMemoria();
+funciones.memoriaDisponible();
 
-for (var i = 0;i<1000000;i++){
-	vec.push(i);
-}
-	
-console.log('La memoria disponible es :'+os.freemem());
+
+
+
+
+
+
+
+
