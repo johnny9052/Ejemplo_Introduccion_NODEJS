@@ -1,95 +1,10 @@
-var http = require('http');
-var url = require('url');
-var fs = require('fs');
-
-var mime = {
-    'html': 'text/html',
-    'css': 'text/css',
-    'jpg': 'image/jpg',
-    'ico': 'image/x-icon',
-    'mp3': 'audio/mpeg3',
-    'mp4': 'video/mp4'
-};
-
-var servidor = http.createServer(function (pedido, respuesta) {
-    var objetourl = url.parse(pedido.url);
-    var camino = 'public' + objetourl.pathname;
-    console.log(camino);
-    if (camino == 'public/')
-        camino = 'public/index.html';
-    encaminar(pedido, respuesta, camino);
-});
-
-servidor.listen(8888);
+/*Con el ./ se indica que el archivo que se va a necesitar se encuentra en la 
+ * misma carpeta, ademas cuando no se coloca esto NODE busca en su nucleo dicho
+ * repositorio */
+var funciones = require('./funciones');
 
 
-function encaminar(pedido, respuesta, camino) {
+funciones.configurarServidor();
+funciones.iniciarServidor();
 
-    switch (camino) {
-        case 'public/listanumeros':
-        {
-            listar(pedido, respuesta);
-            break;
-        }
-        case 'public/listadotabla':
-        {
-            listarTablaMultiplicar(pedido, respuesta);
-            break;
-        }
-        default :
-        {
-            fs.exists(camino, function (existe) {
-                if (existe) {
-                    fs.readFile(camino, function (error, contenido) {
-                        if (error) {
-                            respuesta.writeHead(500, {'Content-Type': 'text/plain'});
-                            respuesta.write('Error interno');
-                            respuesta.end();
-                        } else {
-                            var vec = camino.split('.');
-                            var extension = vec[vec.length - 1];
-                            var mimearchivo = mime[extension];
-                            respuesta.writeHead(200, {'Content-Type': mimearchivo});
-                            respuesta.write(contenido);
-                            respuesta.end();
-                        }
-                    });
-                } else {
-                    respuesta.writeHead(404, {'Content-Type': 'text/html'});
-                    respuesta.write('<!doctype html><html><head></head><body>Recurso inexistente</body></html>');
-                    respuesta.end();
-                }
-            });
-        }
-    }
-}
-
-
-function listar(pedido, respuesta) {
-    var info = '';
-    respuesta.writeHead(200, {'Content-Type': 'text/html'});
-    var pagina = '<!doctype html><html><head></head><body>';
-    for (var f = 1; f <= 20; f++) {
-        //Se crean 20 enlaces, cada uno con su respectiva variable get, apuntanto a listadoTabla. 
-        pagina += '<a href="listadotabla?num=' + f + '">' + f + '</a><br>';
-    }
-    pagina += '</body></html>';
-    respuesta.end(pagina);
-}
-
-function listarTablaMultiplicar(pedido, respuesta) {
-    //SE CAPTURA EL VALOR POR GET, EL TRUE SIEMPRE SE DEBE PASAR
-    var valor = url.parse(pedido.url, true).query.num;
-
-    respuesta.writeHead(200, {'Content-Type': 'text/html'});
-
-    var pagina = '<!doctype html><html><head></head><body>';
-    for (var f = 1; f <= 10; f++) {
-        pagina += valor + '*' + f + '=' + (valor * f) + '<br>';
-    }
-    pagina += '</body></html>';
-    respuesta.end(pagina);
-}
-
-
-console.log('Servidor web iniciado');
+//Abrir el navegador e ingresar a localhost:8888

@@ -7,6 +7,7 @@ var fs = require('fs');
 /*Variable que gestionara el servidor*/
 var servidor;
 
+
 /*Archivos soportados en la transferencia*/
 var mime = {
     'html': 'text/html',
@@ -17,29 +18,53 @@ var mime = {
     'mp4': 'video/mp4'
 };
 
+
+
+
 function configurarServidor() {
     servidor = http.createServer(function (entrada, respuesta) {
         var ruta = definirRuta(entrada);
-        //Validamos si la pagina solicitada existe
-        fs.exists(ruta, function (existe) {
-            //Si la encontro
-            if (existe) {
-                cargarPagina(ruta, respuesta);
+
+
+        switch (ruta) {
+            case 'static/listanumeros':
+            {
+                listar(entrada, respuesta);
+                break;
             }
-            //Si no existe respondemos error 404
-            else {
-                mostrarError(respuesta);
+            case 'static/listadotabla':
+            {
+                listarTablaMultiplicar(entrada, respuesta);
+                break;
             }
-        });
+
+            default:
+            {
+                //Validamos si la pagina solicitada existe
+                fs.exists(ruta, function (existe) {
+                    //Si la encontro
+                    if (existe) {
+                        cargarPagina(ruta, respuesta);
+                    }
+                    //Si no existe respondemos error 404
+                    else {
+                        mostrarError(respuesta);
+                    }
+                });
+            }
+        }
+
+
     });
 }
+
+
 
 
 function iniciarServidor() {
     servidor.listen(8888);
     console.log('Servidor web iniciado');
 }
-
 
 
 function definirRuta(entrada) {
@@ -53,6 +78,8 @@ function definirRuta(entrada) {
     }
     return ruta;
 }
+
+
 
 
 function cargarPagina(ruta, respuesta) {
@@ -87,7 +114,36 @@ function mostrarError(respuesta) {
 }
 
 
+
+
+function listar(entrada, respuesta) {
+    respuesta.writeHead(200, {'Content-Type': 'text/html'});
+    var pagina = '<!doctype html><html><head></head><body>';
+    for (var f = 1; f <= 20; f++) {
+        //Se crean 20 enlaces, cada uno con su respectiva variable get, apuntanto a listadoTabla. 
+        pagina += '<a href="listadotabla?num=' + f + '">' + f + '</a><br>';
+    }
+    pagina += '</body></html>';
+    respuesta.end(pagina);
+}
+
+function listarTablaMultiplicar(pedido, respuesta) {
+    //SE CAPTURA EL VALOR POR GET, EL TRUE SIEMPRE SE DEBE PASAR
+    var valor = url.parse(pedido.url, true).query.num;
+
+    respuesta.writeHead(200, {'Content-Type': 'text/html'});
+
+    var pagina = '<!doctype html><html><head></head><body>';
+    for (var f = 1; f <= 10; f++) {
+        pagina += valor + '*' + f + '=' + (valor * f) + '<br>';
+    }
+    pagina += '</body></html>';
+    respuesta.end(pagina);
+}
+
+
+
+
 //Habilita a las funciones para que sean llamadas o exportadas desde otros archivos 
 exports.configurarServidor = configurarServidor;
 exports.iniciarServidor = iniciarServidor;
-

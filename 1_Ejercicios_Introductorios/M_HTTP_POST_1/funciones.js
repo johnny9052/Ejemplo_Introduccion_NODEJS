@@ -4,6 +4,8 @@ var http = require('http');
 var url = require('url');
 /*Modulo que me permite leer archivos*/
 var fs = require('fs');
+/*Modulo para recibir y analizar los datos que llegan por post*/
+var querystring = require('querystring');
 /*Variable que gestionara el servidor*/
 var servidor;
 
@@ -17,29 +19,48 @@ var mime = {
     'mp4': 'video/mp4'
 };
 
+
+
 function configurarServidor() {
     servidor = http.createServer(function (entrada, respuesta) {
         var ruta = definirRuta(entrada);
-        //Validamos si la pagina solicitada existe
-        fs.exists(ruta, function (existe) {
-            //Si la encontro
-            if (existe) {
-                cargarPagina(ruta, respuesta);
+
+
+        switch (ruta) {
+            //Si se mandaron los datos por POST
+            case 'static/recuperardatos':
+            {
+                obtenerDatos(entrada, respuesta);
+                break;
             }
-            //Si no existe respondemos error 404
-            else {
-                mostrarError(respuesta);
+
+            default:
+            {
+                //Validamos si la pagina solicitada existe
+                fs.exists(ruta, function (existe) {
+                    //Si la encontro
+                    if (existe) {
+                        cargarPagina(ruta, respuesta);
+                    }
+                    //Si no existe respondemos error 404
+                    else {
+                        mostrarError(respuesta);
+                    }
+                });
             }
-        });
+        }
+
+
     });
 }
+
+
 
 
 function iniciarServidor() {
     servidor.listen(8888);
     console.log('Servidor web iniciado');
 }
-
 
 
 function definirRuta(entrada) {
@@ -53,6 +74,8 @@ function definirRuta(entrada) {
     }
     return ruta;
 }
+
+
 
 
 function cargarPagina(ruta, respuesta) {
@@ -87,7 +110,46 @@ function mostrarError(respuesta) {
 }
 
 
+
+
+
+/*Funcion que lee los datos enviados por post*/
+/*entrada = URL que contiene toda la info      
+ * Respuesta = Referencia a donde se responde los datos*/
+function obtenerDatos(entrada, respuesta) {
+
+    /*Contendra todos los datos*/
+    var info = '';
+
+    /*De la entrada primero se extrae su informacion, a medida que van llengado 
+     * los datos*/
+    entrada.on('data', function (datosparciales) {
+        /*Se va concatenando en info, los datos que van llegando. 
+         * Ejemplo: nombre=juan&clave=123456*/
+        info += datosparciales;
+    });
+
+    /*Luego, cuando se reciben todos los datos se ejecuta el END. */
+    entrada.on('end', function () {
+        /*Se parsean los datos a JSON, ejemplo:   
+         * {nombre:'juan',clave:'123456'}*/
+        var datos = querystring.parse(info);
+
+        //Ya con los datos en JSON, se pueden leer formulario['nombre']   formulario['clave']  
+        respuesta.writeHead(200, {'Content-Type': 'text/html'});
+        var pagina = '<!doctype html><html><head></head><body>' +
+                'Nombre de usuario:' + datos['nombre'] + '<br>' +
+                'Clave:' + datos['clave'] + '<br>' +
+                '<a href="index.html">Retornar</a>' +
+                '</body></html>';
+        //Se responde al cliente. 
+        respuesta.end(pagina);
+    });
+}
+
+
+
+
 //Habilita a las funciones para que sean llamadas o exportadas desde otros archivos 
 exports.configurarServidor = configurarServidor;
 exports.iniciarServidor = iniciarServidor;
-
