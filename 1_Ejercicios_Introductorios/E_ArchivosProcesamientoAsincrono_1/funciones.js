@@ -4,7 +4,6 @@ var fs = require('fs');
 var rutaArchivo = 'archivo1.txt';
 var contenidoArchivo = 'linea 1\nLinea 2';
 
-
 function crearArchivo() {
     /*(nombre archivo, contenido del archivo, funcion que se ejecuta cuando 
      * termina la creacion del archivo)*/

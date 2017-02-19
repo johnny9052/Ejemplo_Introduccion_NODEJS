@@ -26,8 +26,6 @@ function mostrarErrorDivision() {
     console.log('No se puede dividir por cero');
 }
 
-
-
 //Habilita a las funciones para que sean llamadas o exportadas desde otros archivos 
 exports.sumar = sumar;
 exports.restar = restar;

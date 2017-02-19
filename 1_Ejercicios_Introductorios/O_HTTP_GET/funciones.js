@@ -127,6 +127,10 @@ function listar(entrada, respuesta) {
     respuesta.end(pagina);
 }
 
+
+
+
+
 function listarTablaMultiplicar(pedido, respuesta) {
     //SE CAPTURA EL VALOR POR GET, EL TRUE SIEMPRE SE DEBE PASAR
     var valor = url.parse(pedido.url, true).query.num;

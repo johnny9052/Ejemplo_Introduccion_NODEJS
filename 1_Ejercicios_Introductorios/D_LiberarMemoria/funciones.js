@@ -1,10 +1,8 @@
 var os = require('os');
 
-
 function memoriaDisponible() {
     console.log('La memoria disponible es :' + os.freemem());
 }
-
 
 function llenarMemoria() {
     var vec = new Array();

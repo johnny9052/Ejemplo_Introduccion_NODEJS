@@ -10,7 +10,7 @@
         bin: Donde se encuentra el ejecutable del server
         node_modules: Donde quedan instalados los modulos adicionales
         public: Donde van los js imagenes y css
-        routes: Donde se implementan la logia de negocio
+        routes: Donde se implementan la logica de negocio
         views: Vistas que quedan a la espera de los resultados del route
         app.js: Configuracion del proyecto
         package.json: Instalacion de modulos

@@ -3,8 +3,8 @@
  * repositorio */
 var funciones = require('./funciones');
 
-funciones.configurarServidor();
-funciones.iniciarServidor();
 
-/*Acceder al navegador e ingresar 
- * http://localhost:8888/carpeta1/pagina1.html?parametro1=10&metro2=20*/
+funciones.iniciarLectura();
+
+/*Con esta linea se evidencia el proceso asincrono*/
+console.log('Ultima linea del programa');
