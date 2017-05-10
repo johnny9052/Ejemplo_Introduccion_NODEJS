@@ -1,0 +1,17 @@
+1. Añadir en el package.json la dependencia "express-handlebars": "^3.0.0", la 
+   cual permite montar el master page
+
+2. En el app.js se añade lo siguiente: 
+    *Hacer el require var exphbs = require('express-handlebars');
+    * Se indica cual es el archivo de la master page
+        *app.engine('.hbs', exphbs({extname: '.hbs', defaultLayout: 'masterPage'}));
+
+3. Se pega la carpeta bower components con todo lo que ahi contiene, y la carpeta de 
+   la raiz app.js
+
+4. Se crea la carpeta layout, con su archivo interno, ademas de la impementacion de dicho archivo. 
+   este es el archivo master page
+
+5. Añadir los archivos estudiante.hbs y universidad.hbs
+
+6. Realizar la implementacion de index.js
