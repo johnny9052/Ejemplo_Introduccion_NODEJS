@@ -1,0 +1,2059 @@
+<!DOCTYPE html>
+<!-- saved from url=(0102)http://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module -->
+<html itemscope="" itemtype="http://schema.org/QAPage"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>javascript - What is the proper way to use the node.js postgresql module? - Stack Overflow</title>
+    <link rel="shortcut icon" href="https://cdn.sstatic.net/Sites/stackoverflow/img/favicon.ico?v=4f32ecc8f43d">
+    <link rel="apple-touch-icon image_src" href="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon.png?v=c78bd457575a">
+    <link rel="search" type="application/opensearchdescription+xml" title="Stack Overflow" href="http://stackoverflow.com/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:domain" content="stackoverflow.com">
+    <meta property="og:type" content="website">
+
+    <meta property="og:image" itemprop="image primaryImageOfPage" content="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon@2.png?v=73d79a89bded">
+    <meta name="twitter:title" property="og:title" itemprop="title name" content="What is the proper way to use the node.js postgresql module?">
+    <meta name="twitter:description" property="og:description" itemprop="description" content="I am writing a node.js app on Heroku and using the pg module. I can&#39;t figure out the &quot;right&quot; way to get a client object for each request that I need to query the database.
+
+The documentation uses c...">
+    <meta property="og:url" content="http://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module">
+    <link rel="canonical" href="http://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module">
+
+    
+    
+    <script type="text/javascript" async="" src="./javascript - What is the proper way to use the node.js postgresql module_ - Stack Overflow_files/ados"></script><script src="./javascript - What is the proper way to use the node.js postgresql module_ - Stack Overflow_files/rules-p-c1rF4kxgLUzNc.js.descarga"></script><script async="" src="./javascript - What is the proper way to use the node.js postgresql module_ - Stack Overflow_files/quant.js.descarga"></script><script async="" src="./javascript - What is the proper way to use the node.js postgresql module_ - Stack Overflow_files/beacon.js.descarga"></script><script async="" src="./javascript - What is the proper way to use the node.js postgresql module_ - Stack Overflow_files/analytics.js.descarga"></script><script type="text/javascript" async="" src="./javascript - What is the proper way to use the node.js postgresql module_ - Stack Overflow_files/ados.js.descarga"></script><script src="./javascript - What is the proper way to use the node.js postgresql module_ - Stack Overflow_files/jquery.min.js.descarga"></script>
+    <script src="./javascript - What is the proper way to use the node.js postgresql module_ - Stack Overflow_files/stub.en.js.descarga"></script>
+    <link rel="stylesheet" type="text/css" href="./javascript - What is the proper way to use the node.js postgresql module_ - Stack Overflow_files/all.css">
+
+            <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;What is the proper way to use the node.js postgresql module?&#39;" href="http://stackoverflow.com/feeds/question/8484404">
+            <meta name="twitter:app:country" content="US">
+            <meta name="twitter:app:name:iphone" content="Stack Exchange iOS">
+            <meta name="twitter:app:id:iphone" content="871299723">
+            <meta name="twitter:app:url:iphone" content="se-zaphod://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module">
+            <meta name="twitter:app:name:ipad" content="Stack Exchange iOS">
+            <meta name="twitter:app:id:ipad" content="871299723">
+            <meta name="twitter:app:url:ipad" content="se-zaphod://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module">
+            <meta name="twitter:app:name:googleplay" content="Stack Exchange Android">
+            <meta name="twitter:app:url:googleplay" content="http://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module">
+            <meta name="twitter:app:id:googleplay" content="com.stackexchange.marvin">
+        <script>
+        
+            StackExchange.ready(function () {
+                                    
+                    StackExchange.using("snippets", function () {
+                        StackExchange.snippets.initSnippetRenderer();
+                    });
+                    
+
+                StackExchange.using("postValidation", function () {
+                    StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+                });
+
+                
+                StackExchange.question.init({showAnswerHelp:true,totalCommentCount:0,shownCommentCount:0,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:8484404});
+
+                styleCode();
+
+                    StackExchange.realtime.subscribeToQuestion('1', '8484404');
+                                                                    StackExchange.using("gps", function () { StackExchange.gps.trackOutboundClicks('#content', '.post-text', true); });
+
+            });
+        </script>
+
+
+    <script>
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","networkMetaHostname":"meta.stackexchange.com","serverTime":1493480496,"routeName":"Questions/Show","site":{"name":"Stack Overflow","description":"Q&A for professional and enthusiast programmers","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdchgIAAAAAAJwGpIzRQSOFaO0pU6s44Xt8aTwc","recaptchaAudioLang":"en","enableNewTagCreationWarning":true,"insertSpaceAfterNameTabCompletion":false,"id":1,"enableInsertDocLinkDialog":true,"childUrl":"https://meta.stackoverflow.com","enableSocialMediaInSharePopup":true,"protocol":"http"},"user":{"fkey":"38df0f7f6a0920e2e23647d971f108be","rep":0,"isAnonymous":true,"isAnonymousNetworkWide":true,"canSeeNewHeaderDesign":true,"ab":{"devstory_timeline_exp":{"v":"c","g":2}}},"events":{"postType":{"question":1},"postEditionSection":{"title":1,"body":2,"tags":3}},"story":{"minCompleteBodyLength":75,"likedTagsMaxLength":300,"dislikedTagsMaxLength":300}}, {"site":{"allowImageUploads":true,"enableUserHovercards":true,"styleCode":true,"enableNewLinkInsertDialog":true,"enableImgurHttps":true,"forceHttpsImages":true},"comments":{},"userProfile":{"openGraphAPIKey":"58740831ad23540e00c58987"},"tags":{},"accounts":{"currentPasswordRequiredForChangingStackIdPassword":true},"flags":{"allowRetractingFlags":true},"snippets":{"snippetsEnabled":true,"renderDomain":"stacksnippets.net"},"markdown":{"asteriskIntraWordEmphasis":true},"monitoring":{"clientTimingsAbsoluteTimeout":30000,"clientTimingsDebounceTimeout":1000}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"c8194c882e97","js/moderator.en.js":"1680bc66c75f","js/full-anon.en.js":"491174f5762e","js/full.en.js":"c64361a801b6","js/wmd.en.js":"237cdc972847","js/third-party/jquery.autocomplete.min.js":"d3b8fa7fdf74","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"978c4e09340e","js/help.en.js":"a2f92aacc060","js/tageditor.en.js":"09862381cd28","js/tageditornew.en.js":"50156590bdfb","js/inline-tag-editing.en.js":"2ddfa79492e7","js/revisions.en.js":"cf90cfea0ccf","js/review.en.js":"12e34edc6b2a","js/tagsuggestions.en.js":"b278f9a0b23b","js/post-validation.en.js":"bcd9b4d1fb81","js/explore-qlist.en.js":"e71f14781288","js/events.en.js":"3290bc2c45a8","js/keyboard-shortcuts.en.js":"782ae2fb044e","js/external-editor.en.js":"e574ed908cf3","js/adops.en.js":"9a6a7812a212","js/external-editor.en.js":"e574ed908cf3","js/snippet-javascript.en.js":"8949a8564319","js/snippet-javascript-codemirror.en.js":"c094075b2957"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+    </script>
+    
+        <script>
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+    <noscript id="noscript-css">&lt;style type="text/css"&gt;body,.so-header{margin-top:1.9em}&lt;/style&gt;</noscript>
+<script async="" src="./javascript - What is the proper way to use the node.js postgresql module_ - Stack Overflow_files/full-anon.en.js.descarga"></script><script async="" src="./javascript - What is the proper way to use the node.js postgresql module_ - Stack Overflow_files/snippet-javascript.en.js.descarga"></script><script async="" src="./javascript - What is the proper way to use the node.js postgresql module_ - Stack Overflow_files/post-validation.en.js.descarga"></script><script async="" src="./javascript - What is the proper way to use the node.js postgresql module_ - Stack Overflow_files/prettify-full.en.js.descarga"></script><script async="" src="./javascript - What is the proper way to use the node.js postgresql module_ - Stack Overflow_files/external-editor.en.js.descarga"></script><script type="text/javascript" src="./javascript - What is the proper way to use the node.js postgresql module_ - Stack Overflow_files/adFeedback.js.descarga"></script><link rel="stylesheet" href="./javascript - What is the proper way to use the node.js postgresql module_ - Stack Overflow_files/adFeedback.css"><link rel="stylesheet" href="./javascript - What is the proper way to use the node.js postgresql module_ - Stack Overflow_files/jobs-multi.min.css" type="text/css"></head>
+<body class="question-page new-topbar">
+            <script>(function () { var old = $.fn.contents; $.fn.contents = function () { try { return old.apply(this, arguments); } catch (e) { return $([]); } } })()</script>
+        
+
+    <div id="notify-container"></div>
+    <div id="custom-header"></div>
+
+
+<header class="so-header js-so-header _fixed _scrolling">
+    <div class="-container">
+        <div class="-main">            
+            <a href="http://stackoverflow.com/" class="-logo js-gps-track " data-gps-track="top_nav.click({is_current:false, location:2, destination:8})">
+
+                <span class="-img">Stack Overflow</span>
+            </a>
+
+            <nav class="navigation" role="navigation" aria-label="site navigation">
+                <ol class="-list">
+                        <li class="-item _current">
+        <a id="nav-questions" href="http://stackoverflow.com/questions" class="-link js-gps-track" data-gps-track="top_nav.click({is_current:true, location:2, destination:1})">Questions</a>
+    </li>
+
+    <li class="-item">
+        <a id="nav-jobs" href="http://stackoverflow.com/jobs?med=site-ui&amp;ref=jobs-tab" class="-link js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:6})">Jobs</a>
+    </li>
+                        <li class="-item">
+        <a id="nav-docs" href="http://stackoverflow.com/documentation" class="-link js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:7})">Documentation <small class="beta-badge">beta</small></a>
+    </li>
+                        <li class="-item">
+        <a id="nav-tags" href="http://stackoverflow.com/tags" class="-link js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:2})">Tags</a>
+    </li>
+
+                        <li class="-item">
+        <a id="nav-users" href="http://stackoverflow.com/users" class="-link js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:3})">Users</a>
+    </li>
+
+                </ol>
+            </nav>
+
+            <form id="search" action="http://stackoverflow.com/search" method="get" class="searchbar" autocomplete="off" role="search">
+                <svg viewBox="0 0 18 18" width="18" height="18" role="icon"><path fill-rule="evenodd" d="M12.864 11.32h-.813l-.288-.277A6.66 6.66 0 0 0 13.38 6.69a6.69 6.69 0 1 0-6.69 6.69 6.66 6.66 0 0 0 4.354-1.617l.278.288v.813L16.467 18 18 16.467l-5.136-5.146zm-6.174 0a4.625 4.625 0 0 1-4.632-4.63A4.625 4.625 0 0 1 6.69 2.058a4.625 4.625 0 0 1 4.63 4.632 4.625 4.625 0 0 1-4.63 4.63z"></path></svg>
+                <input name="q" type="text" placeholder="Search..." value="" tabindex="1" autocomplete="off" maxlength="240" class="f-input js-search-field">
+                <button type="submit" class="btn js-search-submit">
+                    <svg viewBox="0 0 18 18" width="18" height="18" role="icon"><path fill-rule="evenodd" d="M12.864 11.32h-.813l-.288-.277A6.66 6.66 0 0 0 13.38 6.69a6.69 6.69 0 1 0-6.69 6.69 6.66 6.66 0 0 0 4.354-1.617l.278.288v.813L16.467 18 18 16.467l-5.136-5.146zm-6.174 0a4.625 4.625 0 0 1-4.632-4.63A4.625 4.625 0 0 1 6.69 2.058a4.625 4.625 0 0 1 4.63 4.632 4.625 4.625 0 0 1-4.63 4.63z"></path></svg>
+                </button>
+            </form>
+
+        </div>
+        
+
+
+<div class="-actions">
+    <nav class="secondary-nav">
+        <div class="-dialog-container js-topbar-dialog-corral">
+
+
+    <div class="topbar-dialog siteSwitcher-dialog dno">
+        <div class="header">
+            <h3><a href="http://stackoverflow.com/">current community</a>
+            </h3>
+        </div>
+        <div class="modal-content current-site-container">
+            <ul class="current-site">
+                    <li>
+                            <div class="related-links">
+            <a href="http://stackoverflow.com/help" class="js-gps-track" data-gps-track="site_switcher.click({ item_type:14 })">help</a>
+                    <a href="http://chat.stackoverflow.com/" class="js-gps-track" data-gps-track="site_switcher.click({ item_type:6 })">chat</a>
+            </div>
+
+    <a href="http://stackoverflow.com/" class="current-site-link site-link js-gps-track" data-id="1" data-gps-track="site_switcher.click({ item_type:3 })">
+        <div class="site-icon favicon favicon-stackoverflow" title="Stack Overflow"></div>
+        Stack Overflow
+    </a>
+
+                    </li>
+                    <li class="related-site">
+                            <div class="L-shaped-icon-container">
+        <span class="L-shaped-icon"></span>
+    </div>
+
+                        
+    <a href="https://meta.stackoverflow.com/" class="site-link js-gps-track" data-id="552" data-gps-track="site.switch({ target_site:552, item_type:3 }),site_switcher.click({ item_type:4 })">
+        <div class="site-icon favicon favicon-stackoverflowmeta" title="Meta Stack Overflow"></div>
+        Meta Stack Overflow
+    </a>
+
+                    </li>
+            </ul>
+        </div>
+
+        <div class="header" id="your-communities-header">
+            <h3>
+your communities            </h3>
+
+        </div>
+        <div class="modal-content" id="your-communities-section">
+
+                <div class="call-to-login">
+<a href="https://stackoverflow.com/users/signup?ssrc=site_switcher&amp;returnurl=%2fusers%2fstory%2fcurrent&amp;amp;utm_source=stackoverflow.com&amp;amp;utm_medium=dev-story&amp;amp;utm_campaign=signup-redirect" class="login-link js-gps-track" data-gps-track="site_switcher.click({ item_type:10 })">Sign up</a> or <a href="https://stackoverflow.com/users/login?ssrc=site_switcher&amp;returnurl=http%3a%2f%2fstackoverflow.com%2fquestions%2f8484404%2fwhat-is-the-proper-way-to-use-the-node-js-postgresql-module" class="login-link js-gps-track" data-gps-track="site_switcher.click({ item_type:11 })">log in</a> to customize your list.
+                </div>
+        </div>
+
+        <div class="header">
+            <h3><a href="https://stackexchange.com/sites">more stack exchange communities</a>
+            </h3>
+            <a href="https://stackoverflow.blog/" class="fr">company blog</a>
+        </div>
+        <div class="modal-content">
+                <div class="child-content"></div>
+        </div>        
+    </div>
+                <div class="topbar-dialog help-dialog js-help-dialog dno">
+        <div class="modal-content">
+            <ul>
+                                    <li>
+                        <a href="http://stackoverflow.com/tour" class="js-gps-track" data-gps-track="help_popup.click({ item_type:1 })">
+                            Tour
+                            <span class="item-summary">
+                                Start here for a quick overview of the site
+                            </span>
+                        </a>
+                    </li>
+                <li>
+                    <a href="http://stackoverflow.com/help" class="js-gps-track" data-gps-track="help_popup.click({ item_type:4 })">
+                        Help Center
+                        <span class="item-summary">
+                            Detailed answers to any questions you might have
+                        </span>
+                    </a>
+                </li>
+                        <li>
+                            <a href="https://meta.stackoverflow.com/" class="js-gps-track" data-gps-track="help_popup.click({ item_type:2 })">
+                                Meta
+                                <span class="item-summary">
+                                    Discuss the workings and policies of this site
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://stackoverflow.com/company/about" class="js-gps-track" data-gps-track="help_popup.click({ item_type:6 })">
+                                About Us
+                                <span class="item-summary">
+                                    Learn more about Stack Overflow the company
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.stackoverflowbusiness.com/?ref=topbar_help" class="js-gps-track" data-gps-track="help_popup.click({ item_type:7 })">
+                                Business
+                                <span class="item-summary">
+                                    Learn more about hiring developers or posting ads with us
+                                </span>
+                            </a>
+                        </li>
+            </ul>
+        </div>
+    </div>
+
+        </div>
+        <ol class="-list">
+            
+    <li class="-item"><a href="http://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module#" class="-link js-help-button" title="Help Center and other resources">
+        <svg viewBox="0 0 18 18" width="18" height="18" role="icon"><path fill-rule="evenodd" d="M9 0a9 9 0 1 0 .001 18.001A9 9 0 0 0 9 0zm.812 13.126c-.02.716-.55 1.157-1.238 1.137-.659-.02-1.177-.49-1.157-1.209.02-.715.566-1.17 1.225-1.15.691.021 1.194.507 1.17 1.222zm1.956-5.114c-.168.237-.546.542-1.02.912l-.527.361c-.257.197-.417.43-.502.695-.044.141-.076.507-.084.752-.004.048-.032.156-.181.156H7.883c-.165 0-.185-.096-.18-.144.023-.667.12-1.218.397-1.66.374-.594 1.426-1.221 1.426-1.221.161-.12.286-.25.382-.39.177-.24.321-.51.321-.8 0-.333-.08-.65-.293-.915-.249-.31-.518-.458-1.036-.458-.51 0-.808.257-1.021.594-.213.338-.177.735-.177 1.097H5.746c0-1.366.357-2.238 1.112-2.752.51-.35 1.162-.502 1.921-.502.996 0 1.788.184 2.487.715.647.49.988 1.181.988 2.113 0 .575-.2 1.057-.486 1.447z"></path></svg>
+    </a></li>
+                <li class="-item">
+        <a href="https://stackexchange.com/" class="-link js-site-switcher-button js-gps-track" data-gps-track="site_switcher.show" title="A list of all 167 Stack Exchange sites">
+            <svg viewBox="0 0 18 19" width="18" height="19" role="icon"><path fill-rule="evenodd" d="M0 14a2 2 0 0 0 2 2h10v3l3-3h1a2 2 0 0 0 2-2v-2H0v2zM16 0H2a2 2 0 0 0-2 2v2h18V2a2 2 0 0 0-2-2zM0 6h18v4H0V6z"></path></svg>
+        </a>
+    </li>
+
+
+        </ol>
+    </nav>
+        <div class="-ctas">
+                    <a href="https://stackoverflow.com/users/login?ssrc=head&amp;returnurl=http%3a%2f%2fstackoverflow.com%2fquestions%2f8484404%2fwhat-is-the-proper-way-to-use-the-node-js-postgresql-module" class="login-link btn-clear" rel="nofollow">Log In</a>
+                        <a href="https://stackoverflow.com/users/signup?ssrc=head&amp;returnurl=%2fusers%2fstory%2fcurrent&amp;utm_source=stackoverflow.com&amp;utm_medium=dev-story&amp;utm_campaign=signup-redirect" class="login-link btn" rel="nofollow">Sign Up</a>
+
+        </div>
+</div>
+    </div>
+</header>
+
+    <script>
+        StackExchange.ready(function () { StackExchange.topbar.init(); });
+            StackExchange.scrollPadding.setPaddingTop(60, 10);     </script>
+
+    <div class="container">
+        
+
+
+        <div id="content" class="snippet-hidden">
+
+
+
+            
+
+<div itemscope="" itemtype="http://schema.org/Question">
+    <link itemprop="image" href="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon.png?v=c78bd457575a">
+
+
+<div id="herobox" class="alternate">
+    <div class="test"></div>
+        <div id="close">
+            <a title="click to minimize"><span>x</span> Dismiss</a>
+        </div>
+    <div class="content">
+        <b>Join the Stack Overflow Community</b>
+        <div class="separator"></div>
+        <div class="blurb">
+            Stack Overflow is a community of 7.1 million programmers, just like you, helping each other.
+                <br>
+Join them; it only takes a minute:                <br>
+        </div>
+        <a href="http://stackoverflow.com/users/signup?ssrc=hero&amp;returnurl=%2fusers%2fstory%2fcurrent&amp;amp;utm_source=stackoverflow.com&amp;amp;utm_medium=dev-story&amp;amp;utm_campaign=signup-redirect" id="tell-me-more" class="button">Sign up</a>
+    </div>
+</div>
+<script>
+    StackExchange.ready(function () {
+
+        var location = 0;
+        if ($("body").hasClass("questions-page")) {
+            location = 1;;
+        } else if ($("body").hasClass("question-page")) {
+            location = 1;;
+        } else if ($("body").hasClass("faq-page")) {
+            location = 5;;
+        } else if ($("body").hasClass("home-page")) {
+            location = 3;;
+        }
+        
+        $('#tell-me-more').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: 'cta', location: location }, true);
+            });
+        });
+        
+        $('#herobox #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "minimize", location: location }, true);
+            });
+            
+            $.cookie("hero", "mini", { path: "/", expires: 365 });
+            $.ajax({
+                url: "/hero-mini",
+                success: function (data) {
+                    $("#herobox").fadeOut("fast", function () {
+                        $("#herobox").replaceWith(data);
+                        $("#herobox-mini").fadeIn("fast");
+                    });
+                }
+            });
+            return false;
+        });
+    });
+
+</script>			<div id="question-header">
+                <h1 itemprop="name"><a href="http://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module" class="question-hyperlink">What is the proper way to use the node.js postgresql module?</a></h1>
+
+            
+<div class="aside-cta" role="navigation" aria-label="ask new question">
+    <a href="http://stackoverflow.com/questions/ask" class="btn-outlined">Ask Question</a>
+</div>
+		</div>
+			<div id="mainbar" role="main" aria-label="question and answers">
+
+			
+
+<div class="question" data-questionid="8484404" id="question">
+
+    <script>
+                var ados = ados || {}; ados.run = ados.run || [];
+                ados.run.push(function () { ados_add_placement(22,8277,"adzerk1155926466",4).setZone(43); });
+            </script>
+            <div class="everyonelovesstackoverflow adzerk-vote" id="adzerk1155926466"><iframe id="ados_frame_adzerk1155926466_3076375" frameborder="0" scrolling="no" height="90" width="728" src="./javascript - What is the proper way to use the node.js postgresql module_ - Stack Overflow_files/saved_resource.html"></iframe><div class="adzerk-vote-controls" style="display:none;"><div class="adzerk-vote-option adzerk-vote-up"><div class="adzerk-vote-icon"></div></div><div class="adzerk-vote-option adzerk-vote-down"><div class="adzerk-vote-icon"></div></div></div><div class="adzerk-vote-survey" style="display:none;"><form><span>No problem. We won't show you that ad again. Why didn't you like it?</span><ul><li><label><input type="radio" value="12" name="downvoteReason">Uninteresting</label></li><li><label><input type="radio" value="13" name="downvoteReason">Misleading</label></li><li><label><input type="radio" value="14" name="downvoteReason">Offensive</label></li><li><label><input type="radio" value="15" name="downvoteReason">Repetitive</label></li><li><label><input type="radio" value="16" name="downvoteReason">Other</label></li></ul><a href="http://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module#" class="adzerk-vote-cancel">Oops! I didn't mean to do this.</a></form></div><img height="0px" width="0px" border="0" style="position:absolute;" src="./javascript - What is the proper way to use the node.js postgresql module_ - Stack Overflow_files/i.gif"></div>    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="8484404">
+        <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">65</span>
+        <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+
+        <a class="star-off" href="http://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module#">favorite</a>
+        <div class="favoritecount"><b>50</b></div>
+
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="text">
+
+<p>I am writing a node.js app on Heroku and using the <a href="https://github.com/brianc/node-postgres" rel="noreferrer">pg module</a>. I can't figure out the "right" way to get a client object for each request that I need to query the database.</p>
+
+<p>The documentation uses code like this:</p>
+
+<pre class="default prettyprint prettyprinted"><code><span class="pln">pg</span><span class="pun">.</span><span class="pln">connect</span><span class="pun">(</span><span class="pln">conString</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(</span><span class="pln">err</span><span class="pun">,</span><span class="pln"> client</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  </span><span class="com">// Use the client to do things here</span><span class="pln">
+</span><span class="pun">});</span></code></pre>
+
+<p>But surely you don't need to call <code>pg.connect</code> inside every function that uses the database right? I've seen <a href="https://github.com/metadaddy-sfdc/node_chat" rel="noreferrer">other code</a> that does this:</p>
+
+<pre class="default prettyprint prettyprinted"><code><span class="kwd">var</span><span class="pln"> conString </span><span class="pun">=</span><span class="pln"> process</span><span class="pun">.</span><span class="pln">env</span><span class="pun">.</span><span class="pln">DATABASE_URL </span><span class="pun">||</span><span class="pln"> </span><span class="str">"tcp://postgres:1234@localhost/postgres"</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> client </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> pg</span><span class="pun">.</span><span class="typ">Client</span><span class="pun">(</span><span class="pln">conString</span><span class="pun">);</span><span class="pln">
+client</span><span class="pun">.</span><span class="pln">connect</span><span class="pun">();</span><span class="pln">
+</span><span class="com">// client is a global so you can use it anywhere now</span></code></pre>
+
+<p>I am leaning toward the second option since I believe the free database instance for Heroku is limited to one connection anyway, but are there any drawbacks to doing it this way? Do I need to check if my client object is still connected every time before I use it?</p>
+    </div>
+    <div class="post-taglist">
+        <a href="http://stackoverflow.com/questions/tagged/javascript" class="post-tag js-gps-track" title="show questions tagged &#39;javascript&#39;" rel="tag">javascript</a> <a href="http://stackoverflow.com/questions/tagged/postgresql" class="post-tag js-gps-track" title="show questions tagged &#39;postgresql&#39;" rel="tag">postgresql</a> <a href="http://stackoverflow.com/questions/tagged/node.js" class="post-tag js-gps-track" title="show questions tagged &#39;node.js&#39;" rel="tag">node.js</a> <a href="http://stackoverflow.com/questions/tagged/heroku" class="post-tag js-gps-track" title="show questions tagged &#39;heroku&#39;" rel="tag">heroku</a> 
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/q/8484404" title="short permalink to this question" class="short-link" id="link-post-8484404">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/8484404/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td class="post-signature owner">
+        <div class="user-info ">
+    <div class="user-action-time">
+        asked <span title="2011-12-13 04:38:48Z" class="relativetime">Dec 13 '11 at 4:38</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/683415/philip"><div class="gravatar-wrapper-32"><img src="https://www.gravatar.com/avatar/124e1ab2cc8bf931d531aef45553c973?s=32&amp;d=identicon&amp;r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/683415/philip">Philip</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">1,868</span><span title="3 gold badges"><span class="badge1"></span><span class="badgecount">3</span></span><span title="17 silver badges"><span class="badge2"></span><span class="badgecount">17</span></span><span title="35 bronze badges"><span class="badge3"></span><span class="badgecount">35</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</div>
+</td>
+        </tr>
+                    
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-8484404" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-8484404" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="http://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module#" onclick=""></a>
+        </div>         
+    </td>
+</tr>        </tbody></table>
+</div>
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								5 Answers
+                                <span style="display:none;" itemprop="answerCount">5</span>
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="http://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module?answertab=active#tab-top" data-nav-xhref="" title="Answers with the latest activity first" data-value="active" data-shortcut="A">
+            active</a>
+        <a href="http://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module?answertab=oldest#tab-top" data-nav-xhref="" title="Answers in the order they were provided" data-value="oldest" data-shortcut="O">
+            oldest</a>
+        <a class="youarehere" href="http://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module?answertab=votes#tab-top" data-nav-xhref="" title="Answers with the highest score first" data-value="votes" data-shortcut="V">
+            votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="19282657"></a>
+<div id="answer-19282657" class="answer accepted-answer" data-answerid="19282657" itemscope="" itemtype="http://schema.org/Answer" itemprop="acceptedAnswer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="19282657">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">120</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>I'm the author of <a href="https://github.com/brianc/node-postgres">node-postgres</a>. First, I apologize the documentation has failed to make the right option clear: that's my fault.  I'll try to improve it. I wrote <a href="https://gist.github.com/brianc/6908287">a Gist</a> just now to explain this because <a href="https://gist.github.com/brianc/6908287">the conversation</a> grew too long for Twitter.</p>
+
+<blockquote>
+  <p>Using <code>pg.connect</code> is <strong>the way to go</strong> in a web environment.</p>
+  
+  <p>PostgreSQL server can only handle 1 query at a time per connection. 
+  That means if you have 1 global <code>new pg.Client()</code> connected to your
+  backend your entire app is bottleknecked based on how fast postgres
+  can respond to queries.  It literally will line everything up, queuing
+  each query.  Yeah, it's async and so that's alright...but wouldn't you
+  rather multiply your throughput by 10x?  Use <code>pg.connect</code>  set the
+  <code>pg.defaults.poolSize</code> to something sane (we do 25-100, not sure the
+  right number yet).</p>
+  
+  <p><code>new pg.Client</code> is for when you know what you're doing.  When you need
+  a single long lived client for some reason or need to very carefully
+  control the life-cycle.  A good example of this is when using
+  <code>LISTEN/NOTIFY</code>.  The listening client needs to be around and
+  connected and not shared so it can properly handle <code>NOTIFY</code> messages. 
+  Other example would be when opening up a 1-off client to kill some
+  hung stuff or in command line scripts.</p>
+</blockquote>
+
+<p>One very helpful thing is to centralize all access to your database in your app to one file.  Don't litter <code>pg.connect</code> calls or new clients throughout. Have a file like <code>db.js</code> that looks something like this:</p>
+
+<pre class="default prettyprint prettyprinted"><code><span class="kwd">module</span><span class="pun">.</span><span class="pln">exports </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+   query</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(</span><span class="pln">text</span><span class="pun">,</span><span class="pln"> values</span><span class="pun">,</span><span class="pln"> cb</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      pg</span><span class="pun">.</span><span class="pln">connect</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">err</span><span class="pun">,</span><span class="pln"> client</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">done</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        client</span><span class="pun">.</span><span class="pln">query</span><span class="pun">(</span><span class="pln">text</span><span class="pun">,</span><span class="pln"> values</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(</span><span class="pln">err</span><span class="pun">,</span><span class="pln"> result</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+          </span><span class="kwd">done</span><span class="pun">();</span><span class="pln">
+          cb</span><span class="pun">(</span><span class="pln">err</span><span class="pun">,</span><span class="pln"> result</span><span class="pun">);</span><span class="pln">
+        </span><span class="pun">})</span><span class="pln">
+      </span><span class="pun">});</span><span class="pln">
+   </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></code></pre>
+
+<p>This way you can change out your implementation from <code>pg.connect</code> to a custom pool of clients or whatever and only have to change things in one place.</p>
+
+<p>Have a look at the <a href="https://github.com/brianc/node-pg-query">node-pg-query module</a> that does just this.</p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/19282657" title="short permalink to this answer" class="short-link" id="link-post-19282657">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/19282657/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/19282657/revisions" title="show all edits to this post">edited <span title="2015-07-16 20:22:24Z" class="relativetime">Jul 16 '15 at 20:22</span></a>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/363448/voles"><div class="gravatar-wrapper-32"><img src="https://www.gravatar.com/avatar/1252402b941681ed179ed997878571f3?s=32&amp;d=identicon&amp;r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/363448/voles">Voles</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">3,351</span><span title="5 gold badges"><span class="badge1"></span><span class="badgecount">5</span></span><span title="34 silver badges"><span class="badge2"></span><span class="badgecount">34</span></span><span title="66 bronze badges"><span class="badge3"></span><span class="badgecount">66</span></span>
+        </div>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2013-10-09 21:02:22Z" class="relativetime">Oct 9 '13 at 21:02</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/1558175/brianc"><div class="gravatar-wrapper-32"><img src="https://www.gravatar.com/avatar/828ea77c9537e7e0832826f11310c744?s=32&amp;d=identicon&amp;r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/1558175/brianc">brianc</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">1,530</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="8 silver badges"><span class="badge2"></span><span class="badgecount">8</span></span><span title="6 bronze badges"><span class="badge3"></span><span class="badgecount">6</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-19282657" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="1" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-28634772" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="cool">2</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Sorry, I'm fairly new to DBMS and I still have a problem understanding this, but why don't we want to "litter pg.connect" calls? Is it for simplicity or due to performance reason? For example, I call pg.connect once in each of the routes I have in my basic app (all with the same conString). Is this okay? Intuitively, it feels like it's making a new connection to the same db whenever I call it (which I don't want), but does it use the pooled connections internally? Thanks.</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/1164937/user1164937" title="459 reputation" class="comment-user">user1164937</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module#comment28634772_19282657"><span title="2013-10-12 03:31:51Z" class="relativetime-clean">Oct 12 '13 at 3:31</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-38523653" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Awesome. Why are you employing one connection per query instead of one per request? I've been looking for an appropriate way to share a connection across multiple queries within a request and had been considering res.locals prior to finding your answer here.</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/650894/joe-lapp" title="166 reputation" class="comment-user">Joe Lapp</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module#comment38523653_19282657"><span title="2014-07-18 02:08:29Z" class="relativetime-clean">Jul 18 '14 at 2:08</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-38523822" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="cool">2</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Oh wait. It looks like your solution here won't support transactions.</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/650894/joe-lapp" title="166 reputation" class="comment-user">Joe Lapp</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module#comment38523822_19282657"><span title="2014-07-18 02:23:12Z" class="relativetime-clean">Jul 18 '14 at 2:23</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-58996007" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">This should be permalinked to the github.</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/2374365/ryan-willis" title="499 reputation" class="comment-user">Ryan Willis</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module#comment58996007_19282657"><span title="2016-02-26 17:14:58Z" class="relativetime-clean">Feb 26 '16 at 17:14</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-66711968" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">@brianc I'm also new to RDBMS. As reading pg's documentation seems like Client Pooling is the way to go for big websites (or not?). <code>pg-query</code> uses client pooling? If not, do you have an example how to write a <code>db.js</code> when you put your request inside <code>pool.connect((err, client, done) =&gt; {});</code>? The <code>max number of clients in the pool</code> can be very high number, like 10000? And what does it mean exactly? At the exact same moment the database can't handle more visitors than this number?</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/1442219/lanti" title="637 reputation" class="comment-user">Lanti</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module#comment66711968_19282657"><span title="2016-09-26 15:40:50Z" class="relativetime-clean">Sep 26 '16 at 15:40</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-19282657" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link  dno" title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link " title="expand to show all comments on this post" href="http://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module#" onclick="">show <b>1</b> more comment</a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+<script>
+                var ados = ados || {}; ados.run = ados.run || [];
+                ados.run.push(function () { ados_add_placement(22,8277,"adzerk545020075",4).setZone(44); });
+            </script>
+            <div class="everyonelovesstackoverflow adzerk-vote" id="adzerk545020075"><iframe id="ados_frame_adzerk545020075_3120097" frameborder="0" scrolling="no" height="90" width="728" src="./javascript - What is the proper way to use the node.js postgresql module_ - Stack Overflow_files/saved_resource(1).html"></iframe><div class="adzerk-vote-controls" style="display: none;"><div class="adzerk-vote-option adzerk-vote-up"><div class="adzerk-vote-icon"></div></div><div class="adzerk-vote-option adzerk-vote-down"><div class="adzerk-vote-icon"></div></div></div><div class="adzerk-vote-survey" style="display:none;"><form><span>No problem. We won't show you that ad again. Why didn't you like it?</span><ul><li><label><input type="radio" value="12" name="downvoteReason">Uninteresting</label></li><li><label><input type="radio" value="13" name="downvoteReason">Misleading</label></li><li><label><input type="radio" value="14" name="downvoteReason">Offensive</label></li><li><label><input type="radio" value="15" name="downvoteReason">Repetitive</label></li><li><label><input type="radio" value="16" name="downvoteReason">Other</label></li></ul><a href="http://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module#" class="adzerk-vote-cancel">Oops! I didn't mean to do this.</a></form></div><img height="0px" width="0px" border="0" style="position:absolute;" src="./javascript - What is the proper way to use the node.js postgresql module_ - Stack Overflow_files/i(1).gif"></div>
+  
+<a name="30279360"></a>
+<div id="answer-30279360" class="answer" data-answerid="30279360" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="30279360">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">14</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>I am the author of <a href="https://github.com/vitaly-t/pg-promise" rel="nofollow noreferrer">pg-promise</a>, which simplifies the use of <a href="https://github.com/brianc/node-postgres" rel="nofollow noreferrer">node-postgres</a> via promises.</p>
+
+<p>It addresses the issues about the right way of connecting to and disconnecting from the database, using the connection pool implemented by <a href="https://github.com/brianc/node-postgres" rel="nofollow noreferrer">node-postgres</a>, among other things, like automated transactions.</p>
+
+<p>An individual request in <a href="https://github.com/vitaly-t/pg-promise" rel="nofollow noreferrer">pg-promise</a> boils down to just what's relevant to your business logic:</p>
+
+<pre class="default prettyprint prettyprinted"><code><span class="pln">db</span><span class="pun">.</span><span class="pln">any</span><span class="pun">(</span><span class="str">"select * from users where active=$1"</span><span class="pun">,</span><span class="pln"> </span><span class="pun">[</span><span class="kwd">true</span><span class="pun">])</span><span class="pln">
+    </span><span class="pun">.</span><span class="kwd">then</span><span class="pun">(</span><span class="pln">data </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">"DATA:"</span><span class="pun">,</span><span class="pln"> data</span><span class="pun">);</span><span class="pln">
+    </span><span class="pun">})</span><span class="pln">
+    </span><span class="pun">.</span><span class="kwd">catch</span><span class="pun">(</span><span class="pln">error </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">"ERROR:"</span><span class="pun">,</span><span class="pln"> error</span><span class="pun">);</span><span class="pln">
+    </span><span class="pun">});</span></code></pre>
+
+<p>i.e. you do not need to deal with connection logic when executing queries, because you set up the connection only once, globally, like this:</p>
+
+<pre class="default prettyprint prettyprinted"><code><span class="kwd">var</span><span class="pln"> pgp </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">require</span><span class="pun">(</span><span class="str">'pg-promise'</span><span class="pun">)(</span><span class="com">/*options*/</span><span class="pun">);</span><span class="pln">
+
+</span><span class="kwd">var</span><span class="pln"> cn </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    host</span><span class="pun">:</span><span class="pln"> </span><span class="str">'localhost'</span><span class="pun">,</span><span class="pln"> </span><span class="com">// server name or IP address;</span><span class="pln">
+    port</span><span class="pun">:</span><span class="pln"> </span><span class="lit">5432</span><span class="pun">,</span><span class="pln">
+    database</span><span class="pun">:</span><span class="pln"> </span><span class="str">'myDatabase'</span><span class="pun">,</span><span class="pln">
+    user</span><span class="pun">:</span><span class="pln"> </span><span class="str">'myUser'</span><span class="pun">,</span><span class="pln">
+    password</span><span class="pun">:</span><span class="pln"> </span><span class="str">'myPassword'</span><span class="pln">
+</span><span class="pun">};</span><span class="pln">
+</span><span class="com">// alternative:</span><span class="pln">
+</span><span class="com">// var cn = "postgres://username:password@host:port/database";</span><span class="pln">
+
+</span><span class="kwd">var</span><span class="pln"> db </span><span class="pun">=</span><span class="pln"> pgp</span><span class="pun">(</span><span class="pln">cn</span><span class="pun">);</span><span class="pln"> </span><span class="com">// database instance;</span></code></pre>
+
+<p>You can find many more examples in <a href="https://github.com/vitaly-t/pg-promise/wiki/Learn-by-Example" rel="nofollow noreferrer">Learn by Example</a> tutorial, or on the <a href="https://github.com/vitaly-t/pg-promise" rel="nofollow noreferrer">project's home page</a>.</p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/30279360" title="short permalink to this answer" class="short-link" id="link-post-30279360">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/30279360/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/30279360/revisions" title="show all edits to this post">edited <span title="2016-12-16 16:46:22Z" class="relativetime">Dec 16 '16 at 16:46</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        
+        <div class="-flair">
+            
+        </div>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2015-05-16 18:36:22Z" class="relativetime">May 16 '15 at 18:36</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/1102051/vitaly-t"><div class="gravatar-wrapper-32"><img src="./javascript - What is the proper way to use the node.js postgresql module_ - Stack Overflow_files/6GqwA.jpg" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/1102051/vitaly-t">vitaly-t</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">5,400</span><span title="3 gold badges"><span class="badge1"></span><span class="badgecount">3</span></span><span title="25 silver badges"><span class="badge2"></span><span class="badgecount">25</span></span><span title="43 bronze badges"><span class="badge3"></span><span class="badgecount">43</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-30279360" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-64480660" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Hi, Heroku only accepts SSL connections. In <code>pg</code> this is specified by <code>pg.defaults.ssl = true;</code>. How do you do this in <code>pg-promise</code>?</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/5438503/ocram" title="281 reputation" class="comment-user">ocram</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module#comment64480660_30279360"><span title="2016-07-23 17:19:26Z" class="relativetime-clean">Jul 23 '16 at 17:19</span></a></span>
+                        <span class="edited-yes" title="this comment was edited 1 time"></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-64481368" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">@ocram <a href="https://github.com/vitaly-t/pg-promise/wiki/FAQ#how-to-access-the-instance-of-node-postgres-thats-used" rel="nofollow noreferrer">github.com/vitaly-t/pg-promise/wiki/…</a>, or you can specify SSL within the connection parameters: <a href="https://github.com/vitaly-t/pg-promise/wiki/Connection-Syntax" rel="nofollow noreferrer">github.com/vitaly-t/pg-promise/wiki/Connection-Syntax</a></span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/1102051/vitaly-t" title="5,400 reputation" class="comment-user">vitaly-t</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module#comment64481368_30279360"><span title="2016-07-23 17:53:25Z" class="relativetime-clean">Jul 23 '16 at 17:53</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-67178987" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">I'm new to most of this: javascript, promises, postgres, etc. and this is exactly what I needed. Thank you!!</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/1444511/ryan-rodemoyer" title="2,611 reputation" class="comment-user">Ryan Rodemoyer</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module#comment67178987_30279360"><span title="2016-10-09 22:59:26Z" class="relativetime-clean">Oct 9 '16 at 22:59</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-70620386" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="cool">1</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">@ocram I just got this working by doing <code>pgp.pg.defaults.ssl = true;</code></span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/4731823/charliec" title="162 reputation" class="comment-user">CharlieC</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module#comment70620386_30279360"><span title="2017-01-18 06:26:45Z" class="relativetime-clean">Jan 18 at 6:26</span></a></span>
+                        <span class="edited-yes" title="this comment was edited 1 time"></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-30279360" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="http://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="8486170"></a>
+<div id="answer-8486170" class="answer" data-answerid="8486170" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="8486170">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">0</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>As you can see from the <a href="https://github.com/brianc/node-postgres" rel="nofollow">documentation</a> both options are valid, so choose whichever you prefer. As you, I would go with the second choice.</p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/8486170" title="short permalink to this answer" class="short-link" id="link-post-8486170">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/8486170/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2011-12-13 08:23:43Z" class="relativetime">Dec 13 '11 at 8:23</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/617839/alessioalex"><div class="gravatar-wrapper-32"><img src="https://www.gravatar.com/avatar/2c109808640f6163ce0a92810c800999?s=32&amp;d=identicon&amp;r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/617839/alessioalex">alessioalex</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score 41,815" dir="ltr">41.8k</span><span title="8 gold badges"><span class="badge1"></span><span class="badgecount">8</span></span><span title="118 silver badges"><span class="badge2"></span><span class="badgecount">118</span></span><span title="108 bronze badges"><span class="badge3"></span><span class="badgecount">108</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-8486170" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-22153968" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">What about reconnecting when the connection drops? Is that done automatically? The wiki page on error handling is... empty <a href="https://github.com/brianc/node-postgres/wiki/Error-handling" rel="nofollow noreferrer">github.com/brianc/node-postgres/wiki/Error-handling</a></span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/129889/alltom" title="1,663 reputation" class="comment-user">alltom</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module#comment22153968_8486170"><span title="2013-03-25 15:40:09Z" class="relativetime-clean">Mar 25 '13 at 15:40</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-22155144" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">I've asked it separately: <a href="http://stackoverflow.com/questions/15619456/how-do-i-use-node-postgres-in-a-server" title="how do i use node postgres in a server">stackoverflow.com/questions/15619456/…</a></span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/129889/alltom" title="1,663 reputation" class="comment-user">alltom</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module#comment22155144_8486170"><span title="2013-03-25 16:10:32Z" class="relativetime-clean">Mar 25 '13 at 16:10</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-8486170" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="http://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="32899445"></a>
+<div id="answer-32899445" class="answer" data-answerid="32899445" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="32899445">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">-1</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>Here's how I do it, sort of an "all of the above approach"</p>
+
+<pre class="default prettyprint prettyprinted"><code><span class="typ">Promise</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">require</span><span class="pln"> </span><span class="str">'bluebird'</span><span class="pln">
+pg </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">module</span><span class="pun">.</span><span class="pln">exports </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">require</span><span class="pln"> </span><span class="str">'pg'</span><span class="pln">
+
+</span><span class="typ">Promise</span><span class="pun">.</span><span class="pln">promisifyAll pg</span><span class="pun">.</span><span class="typ">Client</span><span class="pun">.</span><span class="pln">prototype
+</span><span class="typ">Promise</span><span class="pun">.</span><span class="pln">promisifyAll pg</span><span class="pun">.</span><span class="typ">Client</span><span class="pln">
+</span><span class="typ">Promise</span><span class="pun">.</span><span class="pln">promisifyAll pg</span><span class="pun">.</span><span class="typ">Connection</span><span class="pun">.</span><span class="pln">prototype
+</span><span class="typ">Promise</span><span class="pun">.</span><span class="pln">promisifyAll pg</span><span class="pun">.</span><span class="typ">Connection</span><span class="pln">
+</span><span class="typ">Promise</span><span class="pun">.</span><span class="pln">promisifyAll pg</span><span class="pun">.</span><span class="typ">Query</span><span class="pun">.</span><span class="pln">prototype
+</span><span class="typ">Promise</span><span class="pun">.</span><span class="pln">promisifyAll pg</span><span class="pun">.</span><span class="typ">Query</span><span class="pln">
+</span><span class="typ">Promise</span><span class="pun">.</span><span class="pln">promisifyAll pg
+
+connectionString </span><span class="pun">=</span><span class="pln"> process</span><span class="pun">.</span><span class="pln">env</span><span class="pun">.</span><span class="pln">DATABASE_URL
+
+</span><span class="kwd">module</span><span class="pun">.</span><span class="pln">exports</span><span class="pun">.</span><span class="pln">queryAsync </span><span class="pun">=</span><span class="pln"> </span><span class="pun">(</span><span class="pln">sql</span><span class="pun">,</span><span class="pln"> values</span><span class="pun">)</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln">
+  pg</span><span class="pun">.</span><span class="pln">connectAsync connectionString
+  </span><span class="pun">.</span><span class="pln">spread </span><span class="pun">(</span><span class="pln">connection</span><span class="pun">,</span><span class="pln"> release</span><span class="pun">)</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln">
+    connection</span><span class="pun">.</span><span class="pln">queryAsync sql</span><span class="pun">,</span><span class="pln"> values
+    </span><span class="pun">.</span><span class="kwd">then</span><span class="pln"> </span><span class="pun">(</span><span class="pln">result</span><span class="pun">)</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln">
+      console</span><span class="pun">.</span><span class="pln">log result</span><span class="pun">.</span><span class="pln">rows</span><span class="pun">[</span><span class="lit">0</span><span class="pun">]</span><span class="pln">
+    </span><span class="pun">.</span><span class="kwd">finally</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln">
+      release</span><span class="pun">()</span></code></pre>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/32899445" title="short permalink to this answer" class="short-link" id="link-post-32899445">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/32899445/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2015-10-02 01:58:32Z" class="relativetime">Oct 2 '15 at 1:58</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/278106/duane-fields"><div class="gravatar-wrapper-32"><img src="https://www.gravatar.com/avatar/916975a2350c68ce5882117cd02a88e1?s=32&amp;d=identicon&amp;r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/278106/duane-fields">Duane Fields</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">1,086</span><span title="10 silver badges"><span class="badge2"></span><span class="badgecount">10</span></span><span title="16 bronze badges"><span class="badge3"></span><span class="badgecount">16</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-32899445" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-53640607" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="cool">1</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">So you will end up with no connection management, no transactions support and no tasks support. What's the point then?</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/1102051/vitaly-t" title="5,400 reputation" class="comment-user">vitaly-t</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module#comment53640607_32899445"><span title="2015-10-02 11:39:25Z" class="relativetime-clean">Oct 2 '15 at 11:39</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-64236164" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="cool">1</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">what language is that? coffee? berk</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/3183756/caub" title="1,243 reputation" class="comment-user">caub</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module#comment64236164_32899445"><span title="2016-07-16 18:34:32Z" class="relativetime-clean">Jul 16 '16 at 18:34</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-32899445" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="http://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="38883369"></a>
+<div id="answer-38883369" class="answer" data-answerid="38883369" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="38883369">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">-1</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>I was interested in a very simple handler for this so I made my own without making it over complicated. I'm under no illusions that it's super basic but it could help some people get started. Basically, it connects, runs queries and handles errors for you.</p>
+
+<pre class="default prettyprint prettyprinted"><code><span class="kwd">function</span><span class="pln"> runQuery</span><span class="pun">(</span><span class="pln">queryString</span><span class="pun">,</span><span class="pln"> callback</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  </span><span class="com">// connect to postgres database</span><span class="pln">
+  pg</span><span class="pun">.</span><span class="pln">connect</span><span class="pun">(</span><span class="pln">postgresDatabase</span><span class="pun">.</span><span class="pln">url</span><span class="pun">,</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">err</span><span class="pun">,</span><span class="pln">client</span><span class="pun">,</span><span class="kwd">done</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="com">// if error, stop here</span><span class="pln">
+    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">err</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">console</span><span class="pun">.</span><span class="pln">error</span><span class="pun">(</span><span class="pln">err</span><span class="pun">);</span><span class="pln"> </span><span class="kwd">done</span><span class="pun">();</span><span class="pln"> callback</span><span class="pun">();</span><span class="pln"> </span><span class="kwd">return</span><span class="pun">;}</span><span class="pln">
+    </span><span class="com">// execute queryString</span><span class="pln">
+    client</span><span class="pun">.</span><span class="pln">query</span><span class="pun">(</span><span class="pln">queryString</span><span class="pun">,</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">err</span><span class="pun">,</span><span class="pln">result</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      </span><span class="com">// if error, stop here</span><span class="pln">
+      </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">err</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">console</span><span class="pun">.</span><span class="pln">error</span><span class="pun">(</span><span class="pln">err</span><span class="pun">+</span><span class="str">'\nQuery: '</span><span class="pun">+</span><span class="pln">queryString</span><span class="pun">);</span><span class="pln"> </span><span class="kwd">done</span><span class="pun">();</span><span class="pln"> callback</span><span class="pun">();</span><span class="pln"> </span><span class="kwd">return</span><span class="pun">;}</span><span class="pln">
+      </span><span class="com">// callback to close connection</span><span class="pln">
+      </span><span class="kwd">done</span><span class="pun">();</span><span class="pln">
+      </span><span class="com">// callback with results</span><span class="pln">
+      callback</span><span class="pun">(</span><span class="pln">result</span><span class="pun">.</span><span class="pln">rows</span><span class="pun">);</span><span class="pln">
+    </span><span class="pun">});</span><span class="pln">
+  </span><span class="pun">});</span><span class="pln">
+</span><span class="pun">}</span></code></pre>
+
+<p>Then you would use by calling it this way:</p>
+
+<pre class="default prettyprint prettyprinted"><code><span class="pln">runQuery</span><span class="pun">(</span><span class="str">"SELECT * FROM table"</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(</span><span class="pln">result</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  </span><span class="com">// Whatever you need to do with 'result'</span><span class="pln">
+</span><span class="pun">}</span></code></pre>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/38883369" title="short permalink to this answer" class="short-link" id="link-post-38883369">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/38883369/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/38883369/revisions" title="show all edits to this post">edited <span title="2016-09-19 20:41:38Z" class="relativetime">Sep 19 '16 at 20:41</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        
+        <div class="-flair">
+            
+        </div>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2016-08-10 20:55:18Z" class="relativetime">Aug 10 '16 at 20:55</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/6702203/jm-agms"><div class="gravatar-wrapper-32"><img src="https://www.gravatar.com/avatar/596141044cac45a2b336c0f8f5c92a82?s=32&amp;d=identicon&amp;r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/6702203/jm-agms">JM-AGMS</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">88</span><span title="8 bronze badges"><span class="badge3"></span><span class="badgecount">8</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-38883369" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-65240796" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">This doesn't even release the connection back to the pool. It will deplete the pool real fast. The basic example on <code>node-postgres</code> page does better than this.</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/1102051/vitaly-t" title="5,400 reputation" class="comment-user">vitaly-t</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module#comment65240796_38883369"><span title="2016-08-14 13:55:55Z" class="relativetime-clean">Aug 14 '16 at 13:55</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-38883369" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="http://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+									<a name="new-answer"></a>
+						<form id="post-form" action="http://stackoverflow.com/questions/8484404/answer/submit" method="post" class="post-form">
+						    <input type="hidden" id="post-id" value="8484404">
+                            <input type="hidden" id="qualityBanWarningShown" name="qualityBanWarningShown" value="false">
+                            <input type="hidden" name="referrer" value="https://www.google.com.co/">
+							<h2 class="space">Your Answer</h2>
+
+
+            <script>
+            StackExchange.ifUsing("editor", function () {
+                StackExchange.using("externalEditor", function () {
+                    StackExchange.using("snippets", function () {
+                        StackExchange.snippets.init();
+                    });
+                });
+            }, "code-snippets");
+        </script>
+    
+
+<script>
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+       
+        StackExchange.using("externalEditor", function() {
+                // Have to fire editor after snippets, if snippets enabled
+                if (StackExchange.settings.snippets.snippetsEnabled) {
+                    StackExchange.using("snippets", function() {
+                        createEditor();
+                    });
+                }
+                else {
+                    createEditor();
+                }
+            });
+
+            function createEditor() {
+                StackExchange.prepareEditor({
+                    heartbeatType: 'answer',
+                convertImagesToLinks: true,
+                reputationToPostImages: 10,
+                bindNavPrevention: true,
+                postfix: "",
+                    onDemand: true,
+                    discardSelector: ".discard-answer"
+                    ,immediatelyShowMarkdownHelp:true
+                    });
+                
+
+        }
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor js-post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"><ul id="wmd-button-row" class="wmd-button-row"><li id="wmd-bold-button" class="wmd-button" style="left: 0px;"><span style="background-position: 0px -20px;"></span></li><li id="wmd-italic-button" class="wmd-button" style="left: 25px;"><span style="background-position: -20px -20px;"></span></li><li id="wmd-spacer1" class="wmd-spacer" style="left: 50px;"><span style="background-position: -40px -20px;"></span></li><li id="wmd-link-button" class="wmd-button" style="left: 75px;"><span style="background-position: -40px -20px;"></span></li><li id="wmd-quote-button" class="wmd-button" style="left: 100px;"><span style="background-position: -60px -20px;"></span></li><li id="wmd-code-button" class="wmd-button" style="left: 125px;"><span style="background-position: -80px -20px;"></span></li><li id="wmd-image-button" class="wmd-button" style="left: 150px;"><span style="background-position: -100px -20px;"></span></li><li id="wmd-spacer2" class="wmd-spacer" style="left: 175px;"><span style="background-position: -120px -20px;"></span></li><li id="wmd-olist-button" class="wmd-button" style="left: 200px;"><span style="background-position: -120px -20px;"></span></li><li id="wmd-ulist-button" class="wmd-button" style="left: 225px;"><span style="background-position: -140px -20px;"></span></li><li id="wmd-heading-button" class="wmd-button" style="left: 250px;"><span style="background-position: -160px -20px;"></span></li><li id="wmd-hr-button" class="wmd-button" style="left: 275px;"><span style="background-position: -180px -20px;"></span></li><li id="wmd-spacer3" class="wmd-spacer" style="left: 300px;"><span style="background-position: -200px -20px;"></span></li><li id="wmd-undo-button" class="wmd-button" style="left: 325px;"><span style="background-position: -200px -20px;"></span></li><li id="wmd-redo-button" class="wmd-button" style="left: 350px;"><span style="background-position: -220px -20px;"></span></li></ul></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="38df0f7f6a0920e2e23647d971f108be">
+        <input id="author" name="author" type="text">
+    </div>
+
+
+
+</div>
+							<div style="position: relative;">
+								
+								            <div class="form-item new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="http://stackoverflow.com/users/login?ssrc=question_page&amp;returnurl=http%3a%2f%2fstackoverflow.com%2fquestions%2f8484404%2fwhat-is-the-proper-way-to-use-the-node-js-postgresql-module%23new-answer">log in</a></h3>
+                        <script>
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                                    
+                                var $window = $(window),
+                                    onScroll = function(e) {
+                                        var $elem = $('.new-login-left'),
+                                            docViewTop = $window.scrollTop(),
+                                            docViewBottom = docViewTop + $window.height(),
+                                            elemTop = $elem.offset().top,
+                                            elemBottom = elemTop + $elem.height();							
+                                        if ((docViewTop < elemTop) && (docViewBottom > elemBottom))  {
+                                            StackExchange.using('gps', function() { StackExchange.gps.track('embedded_signup_form.view', { location: 'question_page' }); });
+                                            $window.unbind('scroll', onScroll);
+                                        }
+                                    };
+                                $window.on('scroll', onScroll);
+                                    
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Email and Password</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid">
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false">
+                    <input type="hidden" name="use-google" class="use-google" value="false">
+                    <input type="button" class="submit-openid" value="Submit" style="display:none">
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tbody><tr>
+                    <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="email" size="30" maxlength="100" value="" tabindex="106" placeholder="required, but never shown">
+                </div>
+            </td>
+        </tr>
+        </tbody></table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script>
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', 'http%3a%2f%2fstackoverflow.com%2fquestions%2f8484404%2fwhat-is-the-proper-way-to-use-the-node-js-postgresql-module%23new-answer', 'question_page');
+                    }
+                );
+            </script>
+            <noscript>
+                        &lt;h3&gt;Post as a guest&lt;/h3&gt;
+    &lt;div class="form-item"&gt;
+        &lt;table&gt;
+        &lt;tr&gt;
+                    &lt;td class="vm"&gt;
+                &lt;div&gt;
+                    &lt;label for="display-name"&gt;Name&lt;/label&gt;
+                    &lt;input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105"&gt;
+                &lt;/div&gt;
+                &lt;div&gt;
+                    &lt;label for="m-address"&gt;Email&lt;/label&gt;
+                    &lt;input id="m-address" name="m-address" type="email" size="30" maxlength="100" value="" tabindex="106" placeholder="required, but never shown" /&gt;
+                &lt;/div&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/div&gt;
+
+            </noscript>
+
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="http://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module#" class="btn-clear discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href="http://stackexchange.com/legal/privacy-policy" name="privacy" target="_blank">privacy policy</a> and <a href="http://stackexchange.com/legal/terms-of-service" name="tos" target="_blank">terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1">								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice" data-loc="1">
+Not the answer you're looking for?							Browse other questions tagged <a href="http://stackoverflow.com/questions/tagged/javascript" class="post-tag" title="show questions tagged &#39;javascript&#39;" rel="tag">javascript</a> <a href="http://stackoverflow.com/questions/tagged/postgresql" class="post-tag" title="show questions tagged &#39;postgresql&#39;" rel="tag">postgresql</a> <a href="http://stackoverflow.com/questions/tagged/node.js" class="post-tag" title="show questions tagged &#39;node.js&#39;" rel="tag">node.js</a> <a href="http://stackoverflow.com/questions/tagged/heroku" class="post-tag" title="show questions tagged &#39;heroku&#39;" rel="tag">heroku</a>  or <a href="http://stackoverflow.com/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes" role="complementary" aria-label="sidebar">
+						    <div class="module question-stats">
+			        <table id="qinfo">
+			            <tbody><tr>
+			                <td>
+			                    <p class="label-key">asked</p>
+			                </td>
+			                <td style="padding-left: 10px">
+			                    <p class="label-key" title="2011-12-13 04:38:48Z"><b>5 years, 4 months ago</b></p>
+			                </td>
+			            </tr>
+			            <tr>
+			                <td>
+			                    <p class="label-key">viewed</p>
+			                </td>
+
+			                <td style="padding-left: 10px">
+			                    <p class="label-key">
+			                        <b>33786 times</b>
+			                    </p>
+			                </td>
+			            </tr>
+			                <tr>
+			                    <td>
+			                        <p class="label-key">active</p>
+			                    </td>
+			                    <td style="padding-left: 10px">
+			                        <p class="label-key"><b><a href="http://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module?lastactivity" class="lastactivity-link" title="2016-12-16 16:46:22Z">4 months ago</a></b></p>
+			                    </td>
+			                </tr>
+			        </tbody></table>
+			    </div>
+						
+			<script>
+                var ados = ados || {}; ados.run = ados.run || [];
+                ados.run.push(function () { ados_add_placement(22,8277,"adzerk1372167868",[5,17,2221,1129,43]).setZone(45); });
+            </script>
+            <div class="everyonelovesstackoverflow adzerk-vote" id="adzerk1372167868"><iframe id="ados_frame_adzerk1372167868_3076376" frameborder="0" scrolling="no" height="250" width="300" data-integralas-id-ed3cec70-2460-21e3-d84f-641d2d6972d9="" src="./javascript - What is the proper way to use the node.js postgresql module_ - Stack Overflow_files/saved_resource(2).html"></iframe><div class="adzerk-vote-controls" style="display:none;"><div class="adzerk-vote-option adzerk-vote-up"><div class="adzerk-vote-icon"></div></div><div class="adzerk-vote-option adzerk-vote-down"><div class="adzerk-vote-icon"></div></div></div><div class="adzerk-vote-survey" style="display:none;"><form><span>No problem. We won't show you that ad again. Why didn't you like it?</span><ul><li><label><input type="radio" value="12" name="downvoteReason">Uninteresting</label></li><li><label><input type="radio" value="13" name="downvoteReason">Misleading</label></li><li><label><input type="radio" value="14" name="downvoteReason">Offensive</label></li><li><label><input type="radio" value="15" name="downvoteReason">Repetitive</label></li><li><label><input type="radio" value="16" name="downvoteReason">Other</label></li></ul><a href="http://stackoverflow.com/questions/8484404/what-is-the-proper-way-to-use-the-node-js-postgresql-module#" class="adzerk-vote-cancel">Oops! I didn't mean to do this.</a></form></div><img height="0px" width="0px" border="0" style="position:absolute;" src="./javascript - What is the proper way to use the node.js postgresql module_ - Stack Overflow_files/i(2).gif"></div>
+            <div id="hireme" class="clc-jobs-multi orange tagged"><a class="top " href="https://stackoverflow.com/jobs?allowsremote=true" target="_blank" data-clc-click="https://clc.stackoverflow.com/click?an=AW0Akv8KIkXs-xaP1EglXBRPQwICELTshQS1xQLu2fgANmsB8U7cUMhRABoAjLAAAIA_AQEAAhsClKgHt9wIx9sPAhoAzs9Fxr05CLcnPxsC84YH4rMIqL0OARoAZMAk2K85SqYTPwASEzh5swJHyos6&amp;cr=10440&amp;ct=1&amp;url=https%3A%2F%2Fstackoverflow.com%2Fjobs%3Fallowsremote%3Dtrue&amp;sig=tNiO31pY7XbNCQ"><span>Work from anywhere</span></a><div class="middle"><ul class="jobs"><li class="&quot;clc-dismissable&quot;"><div class="job-wrap"><a class="job" title="Web Software Engineer (REMOTE) at Plex. Click to learn more." href="https://stackoverflow.com/jobs/140379/web-software-engineer-remote-plex" target="_blank" data-clc-click="https://clc.stackoverflow.com/click?an=AW0Akv8KIkXs-xaP1EglXBRPQwICELTshQS1xQLu2fgANmsB8U7cUMhRABoAjLAAAIA_AQEAAhsClKgHt9wIx9sPAhoAzs9Fxr05CLcnPxsC84YH4rMIqL0OARoAZMAk2K85SqYTPwASEzh5swJHyos6&amp;cr=257479&amp;ct=0&amp;url=https%3A%2F%2Fstackoverflow.com%2Fjobs%2F140379%2Fweb-software-engineer-remote-plex&amp;sig=iJ6HkgP6sxDKYg"><div class="title">Web Software Engineer (REMOTE)</div><div><span class="company">Plex</span><span class="location">San Francisco, CA</span></div><div class="opts"><span class="opt remote">Remote</span></div><span class="post-tag">reactjs</span><span class="post-tag">javascript</span></a></div><a class="clc-dismiss" data-clc-click="https://clc.stackoverflow.com/click?an=AW0Akv8KIkXs-xaP1EglXBRPQwICELTshQS1xQLu2fgANmsB8U7cUMhRABoAjLAAAIA_AQEAAhsClKgHt9wIx9sPAhoAzs9Fxr05CLcnPxsC84YH4rMIqL0OARoAZMAk2K85SqYTPwASEzh5swJHyos6&amp;cr=257479&amp;ct=-1&amp;sig=m2udyze2Wv26kQ" data-clc-meta-target="-1"><span class="clc-tooltip above-left">dismiss this job</span></a></li><li class="&quot;clc-dismissable&quot;"><div class="job-wrap"><a class="job" title="React.js Developer at Toptal LLC. Click to learn more." href="https://stackoverflow.com/jobs/135263/reactjs-developer-toptal-llc" target="_blank" data-clc-click="https://clc.stackoverflow.com/click?an=AW0Akv8KIkXs-xaP1EglXBRPQwICELTshQS1xQLu2fgANmsB8U7cUMhRABoAjLAAAIA_AQEAAhsClKgHt9wIx9sPAhoAzs9Fxr05CLcnPxsC84YH4rMIqL0OARoAZMAk2K85SqYTPwASEzh5swJHyos6&amp;cr=237224&amp;ct=0&amp;url=https%3A%2F%2Fstackoverflow.com%2Fjobs%2F135263%2Freactjs-developer-toptal-llc&amp;sig=Ka1NSig7UiKueA"><div class="title">React.js Developer</div><div><span class="company">Toptal LLC</span><span class="location">No office location</span></div><div class="opts"><span class="opt remote">Remote</span></div><span class="post-tag">reactjs</span><span class="post-tag">react-native</span></a></div><a class="clc-dismiss" data-clc-click="https://clc.stackoverflow.com/click?an=AW0Akv8KIkXs-xaP1EglXBRPQwICELTshQS1xQLu2fgANmsB8U7cUMhRABoAjLAAAIA_AQEAAhsClKgHt9wIx9sPAhoAzs9Fxr05CLcnPxsC84YH4rMIqL0OARoAZMAk2K85SqYTPwASEzh5swJHyos6&amp;cr=237224&amp;ct=-1&amp;sig=H1TkVvANxUVvug" data-clc-meta-target="-1"><span class="clc-tooltip above-left">dismiss this job</span></a></li></ul></div><img src="./javascript - What is the proper way to use the node.js postgresql module_ - Stack Overflow_files/impression.gif" class="impression" style="display: none;"></div>
+        <script>
+window.clc_request = 'AvMJaTgWj9QIAAAAADR2gQACAAAAAgAAAAAmAAAAfGphdmFzY3JpcHR8cG9zdGdyZXNxbHxub2RlLmpzfGhlcm9rdXwAq_eorZqBxhvCNQ';;(function(n){var u={log:window.console.log.bind(window.console,"[clc]"),error:window.console.error.bind(window.console,"[clc]")},f,e,t,r,i;try{if(typeof[].indexOf!="function")return;if(window.attachEvent&&!window.addEventListener)return;if(f=n.allowed,!f)return;if(e=new RegExp(n.allowed),!e.test(location.hostname)){u.error("Invalid host: "+location.hostname);return}if(t=window,t.clc=t.clc||{},t.clc.init=t.clc.init||[],t.clc.init.push(function(n){return n.load()}),t.clc.options){for(r in t.clc.options)n[r]=t.clc.options[r];t.clc.options=n}else t.clc.options=n;i=document.createElement("script");i.async=!0;i.src=n.lib;document.body.appendChild(i)}catch(o){u.error("[clc] Error in loader:",o)}}).call(null, {"lib":"https://cdn.sstatic.net/clc/clc.min.js?v=87491aaa842e","u":"https://clc.stackoverflow.com/markup.js","azw":true,"kt":2000,"tto":true,"d":{"sb":["hireme","clc-sb"],"tlb":["careers1","clc-tlb"],"mlb":["careers3","clc-mlb"]},"h":"clc.stackoverflow.com","autoload":true,"allowed":"^(((talent\\.)?stackoverflow)|(blog\\.codinghorror)|(serverfault|askubuntu)|([^\\.]+\\.stackexchange))\\.com$"});        </script>
+			
+
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+
+<div class="spacer">
+	<a href="http://stackoverflow.com/q/15619456?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">10</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/15619456/how-do-i-use-node-postgres-in-a-server?noredirect=1&amp;lq=1" class="question-hyperlink">How do I use node-postgres in a server?</a>
+</div>
+<div class="spacer">
+	<a href="http://stackoverflow.com/q/32619463?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">2</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/32619463/mocha-node-js-postgresql-integration-testing?noredirect=1&amp;lq=1" class="question-hyperlink">Mocha/Node.js/PostgreSQL integration testing</a>
+</div>
+<div class="spacer">
+	<a href="http://stackoverflow.com/q/36192622?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">0</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/36192622/when-using-postgresql-in-nodejs-how-should-i-query-the-database-from-the-webser?noredirect=1&amp;lq=1" class="question-hyperlink">When using postgresql in Nodejs, how should I query the database from the webserver?</a>
+</div>
+<div class="spacer">
+	<a href="http://stackoverflow.com/q/42127642?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">0</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/42127642/nodejs-postgres-query-with-call?noredirect=1&amp;lq=1" class="question-hyperlink">Nodejs Postgres Query with Call</a>
+</div>
+<div class="spacer">
+	<a href="http://stackoverflow.com/q/31754177?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">1</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/31754177/nodejs-pg-do-crud-with-callback?noredirect=1&amp;lq=1" class="question-hyperlink">nodejs + pg do crud with callback</a>
+</div>
+<div class="spacer">
+	<a href="http://stackoverflow.com/q/41997556?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">1</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/41997556/net-stream-is-not-a-constructor-node-postgres?noredirect=1&amp;lq=1" class="question-hyperlink">net.Stream is not a constructor - Node Postgres</a>
+</div>
+<div class="spacer">
+	<a href="http://stackoverflow.com/q/35527757?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">0</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/35527757/socket-io-emit-not-being-called?noredirect=1&amp;lq=1" class="question-hyperlink">Socket.io emit not being called</a>
+</div>
+<div class="spacer">
+	<a href="http://stackoverflow.com/q/37083688?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">1</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/37083688/proper-way-to-use-pg-postgres-in-node-js?noredirect=1&amp;lq=1" class="question-hyperlink">Proper way to use pg-postgres in node.js?</a>
+</div>			</div>
+</div>
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+                    <div class="related js-gps-related-questions" data-tracker="rq=1">
+                        <div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/122102?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted extra-large">3634</div></a><a href="http://stackoverflow.com/questions/122102/what-is-the-most-efficient-way-to-deep-clone-an-object-in-javascript?rq=1" class="question-hyperlink">What is the most efficient way to deep clone an object in JavaScript?</a></div><div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/2353818?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes extra-large">1267</div></a><a href="http://stackoverflow.com/questions/2353818/how-do-i-get-started-with-node-js?rq=1" class="question-hyperlink">How do I get started with Node.js</a></div><div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/5062614?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted extra-large">2202</div></a><a href="http://stackoverflow.com/questions/5062614/how-to-decide-when-to-use-node-js?rq=1" class="question-hyperlink">How to decide when to use Node.js?</a></div><div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/5311334?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted extra-large">1048</div></a><a href="http://stackoverflow.com/questions/5311334/what-is-the-purpose-of-node-js-module-exports-and-how-do-you-use-it?rq=1" class="question-hyperlink">What is the purpose of Node.js module.exports and how do you use it?</a></div><div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/19085609?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">6</div></a><a href="http://stackoverflow.com/questions/19085609/trying-to-connect-my-node-js-to-heroku-postgresql-database-following-heroku-pos?rq=1" class="question-hyperlink">Trying to connect my node.js to Heroku PostgreSQL database. Following Heroku Postgres tutorial</a></div><div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/24224142?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">8</div></a><a href="http://stackoverflow.com/questions/24224142/typeerror-cannot-call-method-query-of-null-when-calling-pg-connect-with-her?rq=1" class="question-hyperlink">TypeError: Cannot call method 'query' of null - when calling pg.connect with Heroku node.js</a></div><div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/25000183?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">5</div></a><a href="http://stackoverflow.com/questions/25000183/node-js-postgresql-error-no-pg-hba-conf-entry-for-host?rq=1" class="question-hyperlink">Node.js, PostgreSQL error: no pg_hba.conf entry for host</a></div><div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/25149037?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">0</div></a><a href="http://stackoverflow.com/questions/25149037/econnreset-write-error-when-querying-database-two-times-in-a-row-node-js?rq=1" class="question-hyperlink">ECONNRESET Write error when querying database two times in a row [Node.js]</a></div><div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/38540764?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">0</div></a><a href="http://stackoverflow.com/questions/38540764/managing-connections-postgresql-and-node-js?rq=1" class="question-hyperlink">Managing connections PostgreSQL and Node.js</a></div><div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/38670538?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">0</div></a><a href="http://stackoverflow.com/questions/38670538/cannot-create-postgresql-tables-on-heroku-with-node-js?rq=1" class="question-hyperlink">Cannot create postgresql tables on heroku with Node.js</a></div>
+                    </div>
+				</div>
+            
+
+<div id="hot-network-questions" class="module tex2jax_ignore">
+    <h4>
+        <a href="https://stackexchange.com/questions?tab=hot" class="js-gps-track" data-gps-track="posts_hot_network.click({ item_type:1, location:11 })">
+            Hot Network Questions
+        </a>
+    </h4>
+    <ul>
+            <li>
+                <div class="favicon favicon-electronics" title="Electrical Engineering Stack Exchange"></div><a href="https://electronics.stackexchange.com/questions/301719/how-do-i-measure-10-000-a-dc" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:135 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How do I measure 10,000 A DC?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-parenting" title="Parenting Stack Exchange"></div><a href="https://parenting.stackexchange.com/questions/29903/foster-care-for-a-friends-kids" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:228 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Foster care for a friend's kids
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-skeptics" title="Skeptics Stack Exchange"></div><a href="https://skeptics.stackexchange.com/questions/38126/did-the-united-states-reject-an-offer-by-north-korea-to-freeze-their-nuclear-mis" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:212 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Did the United States reject an offer by North Korea to freeze their nuclear missile development?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-scifi" title="Science Fiction &amp; Fantasy Stack Exchange"></div><a href="https://scifi.stackexchange.com/questions/158297/why-didnt-gandalf-just-fight-smaug-directly" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:186 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why didn't Gandalf just fight Smaug directly?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-worldbuilding" title="Worldbuilding Stack Exchange"></div><a href="https://worldbuilding.stackexchange.com/questions/79275/what-would-a-giant-s-voice-be-like" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:579 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What would a Giant’s voice be like?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-academia" title="Academia Stack Exchange"></div><a href="https://academia.stackexchange.com/questions/88706/is-it-good-syntax-to-thank-the-reviewer-for-every-comment-in-peer-review" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:415 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Is it good syntax to thank the reviewer for every comment in peer review?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-rpg" title="Role-playing Games Stack Exchange"></div><a href="https://rpg.stackexchange.com/questions/98873/how-do-i-deal-with-a-player-whose-character-wanders-off-for-no-reason" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:122 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How do I deal with a player whose character wanders off for no reason?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-math" title="Mathematics Stack Exchange"></div><a href="https://math.stackexchange.com/questions/2257256/dense-and-open-subset-of-a-topological-space" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:69 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Dense and open subset of a topological space
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-workplace" title="The Workplace Stack Exchange"></div><a href="https://workplace.stackexchange.com/questions/89954/how-to-answer-the-question-are-you-interviewing-anywhere-else-during-an-inter" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:423 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How to answer the question "are you interviewing anywhere else?" during an interview at a startup
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-worldbuilding" title="Worldbuilding Stack Exchange"></div><a href="https://worldbuilding.stackexchange.com/questions/79424/how-to-justify-powerful-magic-items-being-for-sale-in-a-high-magic-world" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:579 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How to justify powerful magic items being for sale in a high-magic world?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-aviation" title="Aviation Stack Exchange"></div><a href="https://aviation.stackexchange.com/questions/37521/how-is-a-glider-recovered-and-returned-to-an-airport-after-landing-in-a-field" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:528 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How is a glider recovered and returned to an airport after landing in a field?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-outdoors" title="The Great Outdoors Stack Exchange"></div><a href="https://outdoors.stackexchange.com/questions/15998/how-do-you-aim-a-signal-mirror" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:395 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How do you aim a signal mirror?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-security" title="Information Security Stack Exchange"></div><a href="https://security.stackexchange.com/questions/158224/is-it-possible-to-fake-being-connected-to-a-router" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:162 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Is it possible to "fake" being connected to a router?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-scifi" title="Science Fiction &amp; Fantasy Stack Exchange"></div><a href="https://scifi.stackexchange.com/questions/158289/how-did-no-other-engineer-see-the-design-flaw-of-the-death-star" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:186 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How did no other engineer see the design flaw of the Death Star?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-stats" title="Cross Validated"></div><a href="https://stats.stackexchange.com/questions/275677/if-we-fail-to-reject-the-null-hypothesis-in-a-large-study-isnt-it-evidence-for" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:65 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    If we fail to reject the null hypothesis in a large study, isn't it evidence for the null?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-money" title="Personal Finance &amp; Money Stack Exchange"></div><a href="https://money.stackexchange.com/questions/79164/is-it-common-in-the-us-not-to-pay-medical-bills" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:93 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Is it common in the US not to pay medical bills?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-rpg" title="Role-playing Games Stack Exchange"></div><a href="https://rpg.stackexchange.com/questions/99025/when-a-cleric-not-devoted-to-a-deity-picks-the-domain-war-can-he-pick-any-weapo" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:122 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    When a cleric not devoted to a deity picks the domain War, can he pick any weapon?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-ux" title="User Experience Stack Exchange"></div><a href="https://ux.stackexchange.com/questions/107257/should-a-dropdown-list-be-closed-when-mouse-leaves" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:102 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Should a dropdown list be closed when mouse leaves?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-workplace" title="The Workplace Stack Exchange"></div><a href="https://workplace.stackexchange.com/questions/89869/ive-been-offered-a-job-but-my-new-employer-wont-give-me-a-contract-until-afte" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:423 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    I've been offered a job, but my new employer won't give me a contract until after I give my notice
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-money" title="Personal Finance &amp; Money Stack Exchange"></div><a href="https://money.stackexchange.com/questions/79128/infrequent-car-rental-vs-lease-buy" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:93 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Infrequent car rental vs. lease/buy
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-salesforce" title="Salesforce Stack Exchange"></div><a href="https://salesforce.stackexchange.com/questions/172219/how-is-heap-size-calculated" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:459 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How is heap size calculated?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-mathoverflow" title="MathOverflow"></div><a href="https://mathoverflow.net/questions/268540/why-is-quantum-field-theory-so-topological" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:504 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why is Quantum Field Theory so topological?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-scifi" title="Science Fiction &amp; Fantasy Stack Exchange"></div><a href="https://scifi.stackexchange.com/questions/158224/if-the-doctors-two-hearts-lead-the-robots-to-believe-hes-two-people-why-did-h" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:186 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    If the Doctor's two hearts lead the robots to believe he's two people, why did he only get one smiley badge?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-codegolf" title="Programming Puzzles &amp; Code Golf Stack Exchange"></div><a href="https://codegolf.stackexchange.com/questions/117949/from-programming-puzzles-to-code-golf" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:200 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    From Programming Puzzles to Code Golf
+                </a>
+
+            </li>
+    </ul>
+
+        
+</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text">
+        <a href="http://stackoverflow.com/feeds/question/8484404" title="feed of this question and its answers">
+            <span class="feed-icon"></span>question feed
+        </a>
+    </div>
+</div>	<script>
+StackExchange.ready(function(){$.get('/posts/8484404/ivc/13ae');});
+</script>
+<noscript>
+    &lt;div&gt;&lt;img src="/posts/8484404/ivc/13ae" class="dno" alt="" width="0" height="0"&gt;&lt;/div&gt;
+</noscript><div style="display:none" id="prettify-lang">default</div></div>
+
+
+        </div>
+    </div><script async="" src="./javascript - What is the proper way to use the node.js postgresql module_ - Stack Overflow_files/clc.min.js.descarga"></script>
+    <div id="footer" class="categories" role="contentinfo">
+        <div class="footerwrap">            
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                    <a href="http://stackoverflow.com/company/about">about us</a>
+                        <a href="http://stackoverflow.com/tour">tour</a>
+                    <a href="http://stackoverflow.com/help">help</a>
+                    <a href="https://stackoverflow.blog/?blb=1">blog</a>
+                        <a href="http://chat.stackoverflow.com/">chat</a>
+                    <a href="https://data.stackexchange.com/">data</a>
+                    <a href="https://stackexchange.com/legal">legal</a>
+                    <a href="https://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackoverflow.com/company/work-here">work here</a>
+                    <a href="https://www.stackoverflowbusiness.com/advertise">advertising info</a>
+                        <a href="http://stackoverflow.com/jobs/directory/developer-jobs">developer jobs directory</a>
+
+                    <a onclick="StackExchange.switchMobile(&quot;on&quot;)">mobile</a>
+                    <b><a href="http://stackoverflow.com/contact">contact us</a></b>
+                        <b><a href="https://meta.stackoverflow.com/">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tbody><tr>
+            <th colspan="3">
+                Technology
+            </th>
+            <th>
+                Life / Arts
+            </th>
+            <th>
+                Culture / Recreation
+            </th>
+            <th>
+                Science
+            </th>
+            <th>
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com/" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com/" title="system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com/" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com/" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com/" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com/" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com/" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com/" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                        <li><a href="http://softwareengineering.stackexchange.com/" title="professionals, academics, and students working within the systems development life cycle who care about creating, delivering, and maintaining software responsibly">Software Engineering</a></li>
+                        <li><a href="http://unix.stackexchange.com/" title="users of Linux, FreeBSD and other Un*x-like operating systems">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com/" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com/" title="WordPress developers and administrators">WordPress Development</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://gis.stackexchange.com/" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com/" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com/" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com/" title="information security professionals">Information Security</a></li>
+                        <li><a href="http://dba.stackexchange.com/" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com/" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com/" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com/" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com/" title="users of Wolfram Mathematica">Mathematica</a></li>
+                        <li><a href="http://salesforce.stackexchange.com/" title="Salesforce administrators, implementation experts, developers and anybody in-between">Salesforce</a></li>
+                        <li><a href="http://expressionengine.stackexchange.com/" title="administrators, end users, developers and designers for ExpressionEngine® CMS">ExpressionEngine® Answers</a></li>
+                        <li><a href="http://crypto.stackexchange.com/" title="software developers, mathematicians and others interested in cryptography">Cryptography</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://codereview.stackexchange.com/" title="peer programmer code reviews">Code Review</a></li>
+                        <li><a href="http://magento.stackexchange.com/" title="users of the Magento e-Commerce platform">Magento</a></li>
+                        <li><a href="http://dsp.stackexchange.com/" title="practitioners of the art and science of signal, image and video processing">Signal Processing</a></li>
+                        <li><a href="http://raspberrypi.stackexchange.com/" title="users and developers of hardware and software for Raspberry Pi">Raspberry Pi</a></li>
+                        <li><a href="http://codegolf.stackexchange.com/" title="programming puzzle enthusiasts and code golfers">Programming Puzzles &amp; Code Golf</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com/" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com/" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://graphicdesign.stackexchange.com/" title="Graphic Design professionals, students, and enthusiasts">Graphic Design</a></li>
+                        <li><a href="http://movies.stackexchange.com/" title="movie and tv enthusiasts">Movies &amp; TV</a></li>
+                        <li><a href="http://music.stackexchange.com/" title="musicians, students, and enthusiasts">Music: Practice &amp; Theory</a></li>
+                        <li><a href="http://cooking.stackexchange.com/" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com/" title="contractors and serious DIYers">Home Improvement</a></li>
+                        <li><a href="http://money.stackexchange.com/" title="people who want to be financially literate">Personal Finance &amp; Money</a></li>
+                        <li><a href="http://academia.stackexchange.com/" title="academics and those enrolled in higher education">Academia</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (8)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com/" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com/" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com/" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com/" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com/" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://ell.stackexchange.com/" title="speakers of other languages learning English">English Language Learners</a></li>
+                        <li><a href="http://japanese.stackexchange.com/" title="students, teachers, and linguists wanting to discuss the finer points of the Japanese language">Japanese Language</a></li>
+                        <li><a href="http://gaming.stackexchange.com/" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com/" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com/" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                        <li><a href="http://anime.stackexchange.com/" title="anime and manga fans">Anime &amp; Manga</a></li>
+                        <li><a href="http://mechanics.stackexchange.com/" title="mechanics and DIY enthusiast owners of cars, trucks, and motorcycles">Motor Vehicle Maintenance &amp; Repair</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (17)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://mathoverflow.net/" title="professional mathematicians">MathOverflow</a></li>
+                        <li><a href="http://math.stackexchange.com/" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com/" title="people interested in statistics, machine learning, data analysis, data mining, and data visualization">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com/" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com/" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://chemistry.stackexchange.com/" title="scientists, academics, teachers and students">Chemistry</a></li>
+                        <li><a href="http://biology.stackexchange.com/" title="biology researchers, academics, and students">Biology</a></li>
+                        <li><a href="http://cs.stackexchange.com/" title="students, researchers and practitioners of computer science">Computer Science</a></li>
+                        <li><a href="http://philosophy.stackexchange.com/" title="those interested in the study of the fundamental nature of knowledge, reality, and existence">Philosophy</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (3)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://meta.stackexchange.com/" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Exchange</a></li>
+                        <li><a href="http://stackapps.com/" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://area51.stackexchange.com/" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="https://www.stackoverflowbusiness.com/talent">Stack Overflow Talent</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</tbody></table>
+                </div>
+            </div>
+            <div id="copyright">
+                site design / logo © 2017 Stack Exchange Inc; user contributions licensed under <a href="https://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc by-sa 3.0</a> 
+                with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="svnrev">
+                rev 2017.4.28.25783
+            </div>
+                </div>
+    </div>
+    <noscript>
+        &lt;div id="noscript-warning"&gt;Stack Overflow works best with JavaScript enabled&lt;img src="https://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"&gt;&lt;/div&gt;
+    </noscript>
+
+<script>var p = "http", d = "static"; if (document.location.protocol == "https:") { p += "s"; d = "engine"; } var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = p + "://" + d + ".adzerk.net/ados.js"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);</script>
+<script>
+    var ados = ados || {};
+    ados.run = ados.run || [];
+    
+    
+        
+        ados.run.push(function () {
+                setTimeout(function () { $("#adzerk-user-match").remove(); }, window.AUMIframeDone ? 0 : 2000);
+                ados_setKeywords('javascript,postgresql,node.js,heroku');; ados_load();
+        });   
+        
+</script>
+
+    <script>
+            (function(i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function() { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m);
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+                ga('create', 'UA-5620270-1');
+                ga('create', 'UA-5620270-59', {name: 'pageData', sampleRate: 5 });
+                ga('set', 'dimension2', '|javascript|postgresql|node.js|heroku|');
+                ga('pageData.set', 'dimension2', '|javascript|postgresql|node.js|heroku|');
+                ga('send', 'pageview');
+                ga('pageData.send', 'pageview');
+        var _qevents = _qevents || [],
+            _comscore = _comscore || [];
+        (function () {
+            var ssl='https:'==document.location.protocol,
+                s=document.getElementsByTagName('script')[0],
+                qc=document.createElement('script');
+                qc.async = true;
+                qc.src = (ssl ? 'https://secure' : 'http://edge') + '.quantserve.com/quant.js';
+                s.parentNode.insertBefore(qc, s);
+                _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+                            var sc=document.createElement('script');
+                sc.async=true;
+                sc.src=(ssl?'https://sb':'http://b') + '.scorecardresearch.com/beacon.js';
+                s.parentNode.insertBefore(sc, s);
+                _comscore.push({ c1: "2", c2: "17440561" });
+        })();
+
+    </script>
+        
+    
+            <script type="text/javascript">
+                
+                (function(appendChild) {
+                    Node.prototype.appendChild = function() {
+                        var parent = this;
+                        var newNode = arguments[0];
+                        if (parent.nodeName === 'HEAD'
+                            && newNode
+                            && newNode.nodeName === 'SCRIPT'
+                            && newNode.src) {
+                            
+                            window.setTimeout(function() {
+                                var result = newNode.src.match(/^https:\/\/maps\.googleapis\.com\/maps\/api\/place\/js\/(\w+)Service\./i) || [];
+                                var service = result[1];
+                                if (service) {
+                                    if (service === 'Autocompletion') service =  2;
+                                    else if (service === 'Place') service = 1;
+                                    else service = 0;
+                                    StackExchange.using('gps', function() {
+                                        StackExchange.gps.track('google_maps_places_api.call', { service: service });
+                                    });
+                                }
+                            }, 0);
+                        }
+                        return appendChild.apply(this, arguments);
+                    };
+                })(Node.prototype.appendChild);
+            </script>
+    
+</body></html>

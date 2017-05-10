@@ -1,0 +1,6 @@
+1. Crear el archivo articulos.js y db.js
+2. Llamar a articulos.js desde app.js
+3. Definir la conexion a la base de datos desde el bd.js
+4. En el index de la vista definir la ruta de navegacion entre ventanas
+5. Empezar a definir las funciones de articulos.js y a su vez, cada una de las
+   interfaces que reciben los datos.

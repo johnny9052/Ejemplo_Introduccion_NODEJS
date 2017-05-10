@@ -14,7 +14,7 @@ var formidable = require('formidable');
 
 
 function configurarServidor() {
-	 servidor = http.createServer(function (entrada, respuesta) {
+    servidor = http.createServer(function (entrada, respuesta) {
         var ruta = definirRuta(entrada);
 
         switch (ruta) {
@@ -106,48 +106,48 @@ function mostrarError(respuesta) {
 }
 
 
-function subir(pedido,respuesta){
+function subir(pedido, respuesta) {
     //Se crea una instancia de formidable
-	var entrada=new formidable.IncomingForm();
-	//Se define la ruta donde quedara el archivo
-	entrada.uploadDir='upload';
-	//Se le asocian los datos que llegaron (incluyendo la imagen)
-	entrada.parse(pedido);
-	
-	//Cuando el archivo esta listo para ser almacenado
-    entrada.on('fileBegin', function(field, file){
-		//Se define la ruta pero ahora con el nombre del archivo
-        file.path = "./static/upload/"+file.name;
-    });	
-	
-	//Cuando ya el archivo se almaceno en el servidor
-    entrada.on('end', function(){
-		respuesta.writeHead(200, {'Content-Type': 'text/html'});
-		respuesta.write('<!doctype html><html><head></head><body>'+
-		                'Archivo subido<br><a href="index.html">Retornar</a></body></html>');		
-		respuesta.end();
-    });	
+    var entrada = new formidable.IncomingForm();
+    //Se define la ruta donde quedara el archivo
+    entrada.uploadDir = 'upload';
+    //Se le asocian los datos que llegaron (incluyendo la imagen)
+    entrada.parse(pedido);
+
+    //Cuando el archivo esta listo para ser almacenado
+    entrada.on('fileBegin', function (field, file) {
+        //URI
+        file.path = "./static/upload/" + file.name;
+    });
+
+    //Cuando ya el archivo se almaceno en el servidor
+    entrada.on('end', function () {
+        respuesta.writeHead(200, {'Content-Type': 'text/html'});
+        respuesta.write('<!doctype html><html><head></head><body>' +
+                'Archivo subido<br><a href="index.html">Retornar</a></body></html>');
+        respuesta.end();
+    });
 }
 
 function listar(respuesta) {
-  //Funcion que mapea todo el contenido de una carpeta especificada, donde el parametro
-  //archivos tiene el nombre de cada uno de los archivos encontrados
-  fs.readdir('./static/upload/',function (error,archivos){
-	  var fotos='';
-	  
-	  //Por cada archivo que encuentre
-	  for(var x=0;x<archivos.length;x++) {
-		  //se crea una etiqueta img con la ruta del archivo encontrado
-		  fotos += '<img src="upload/'+archivos[x]+'"><br>';
-	  }
-	  
-	  //Se responde al cliente el listado de todas las imagenes
-	  respuesta.writeHead(200, {'Content-Type': 'text/html'});
-	  respuesta.write('<!doctype html><html><head></head><body>'+
-	  fotos+
-	  '<a href="index.html">Retornar</a></body></html>');		
-	  respuesta.end();	  
-  });	
+    //Funcion que mapea todo el contenido de una carpeta especificada, donde el parametro
+    //archivos tiene el nombre de cada uno de los archivos encontrados
+    fs.readdir('./static/upload/', function (error, archivos) {
+        var fotos = '';
+
+        //Por cada archivo que encuentre
+        for (var x = 0; x < archivos.length; x++) {
+            //se crea una etiqueta img con la ruta del archivo encontrado
+            fotos += '<img src="upload/' + archivos[x] + '"><br>';
+        }
+
+        //Se responde al cliente el listado de todas las imagenes
+        respuesta.writeHead(200, {'Content-Type': 'text/html'});
+        respuesta.write('<!doctype html><html><head></head><body>' +
+                fotos +
+                '<a href="index.html">Retornar</a></body></html>');
+        respuesta.end();
+    });
 }
 
 

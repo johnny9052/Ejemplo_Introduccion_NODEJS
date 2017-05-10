@@ -2,6 +2,8 @@
 var querystring = require('querystring');
 /*Se importa el modulo npm MYSQL*/
 var mysql = require('mysql');
+var conexion;
+
 function conectardb() {
 
     //Se hace una conexion a la base de datos

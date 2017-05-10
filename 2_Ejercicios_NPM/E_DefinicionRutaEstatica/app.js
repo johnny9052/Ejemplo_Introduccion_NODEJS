@@ -1,19 +1,9 @@
-/*Se define la variable _dirname como global para que el IDE no lo pinte 
- * con un warning*/
-
-/* global __dirname */
-
-/*Se carga el modulo express*/
-var express = require('express');
-/*Se define una instancia del express*/
-var app = express();
+/*Con el ./ se indica que el archivo que se va a necesitar se encuentra en la 
+ * misma carpeta, ademas cuando no se coloca esto NODE busca en su nucleo dicho
+ * repositorio */
+var funciones = require('./funciones');
 
 
-/*Ruta  donde se encuentra la vista (Archivos estaticos como html, css, js, etc)
- * __dirname es una variable global que indica la raiz de todo el proyecto*/
-app.use(express.static(__dirname + '/public'));
+funciones.configurarServidor();
 
-/*Se inicia el servidor*/
-var server = app.listen(8888, function () {
-    console.log('Servidor web iniciado');
-});
+//Abrir el navegador e ingresar a localhost:8888

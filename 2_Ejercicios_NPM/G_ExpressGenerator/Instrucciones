@@ -1,0 +1,33 @@
+
+
+1. Si es la primera vez que se va a ejecutar, tener encuenta que se debe instalar global en el equipo
+    * npm install express-generator -g
+
+2. Para crear el proyecto expressgenerator es
+
+     *express nombreProyecto --hbs
+
+     *OJOOO, RECORDAR QUE HBS ES UNA PLANTILLA "Express handlebars"
+
+
+3. Luego accedemos al archivo package.json para configurar el archivo de inicio, establecer dependencias, etc. 
+
+4. Luego ejecutamos
+    * npm install   para instalar las dependencias configuradas
+
+5. Para correr el proyecto es 
+    * npm start
+
+
+6. Estructura del proyecto
+
+    * bin: Configuracion del servidor
+    * node_modules: Dependencias
+    * public : CSS, JS, Multimedia
+    * routes: 
+        *index: Instancia express y definicion de archivo index
+        *user: Archivo adicional, como si uno lo creara manualmente
+    * views: HBS y navegacion
+    * app.js: Instancia de todas las dependencias, llamada a archivos externos creados manualmente, definicion de 
+              carpeta publica
+    * package.json: Dependencias, versionamiento, etc

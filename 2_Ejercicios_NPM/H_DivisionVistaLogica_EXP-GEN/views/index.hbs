@@ -1,18 +1,23 @@
 <h1>{{title}}</h1>
 <p>Welcome to {{title}}</p>
 
-
+<!-- CONSULTAR SINTAXIS COMPLETA HBS http://handlebarsjs.com/ -->
 
 <h1>{{titulo}}</h1>
 <table border="1">
-  <tr>
-    <td>Codigo</td><td>Descripcion</td><td>Precio</td>
-  </tr>
-{{#each articulos}}
-  <tr>  
-     <td>{{codigo}} </td> <td>{{descripcion}}</td> <td>{{precio}}</td>
-  </tr>   
-{{/each}}
+    <tr>
+        <th>Codigo</th>
+        <th>Descripcion</th>
+        <th>Precio</th>
+    </tr>    
+    {{#each articulos}}
+    <tr>  
+        <td>{{codigo}} </td> 
+        <td>{{descripcion}}</td> 
+        <td>{{precio}}</td>
+    </tr>   
+    {{/each}}        
 </table>
+
 <p>Descuentos vigentes el día lunes:{{descuento.lunes}}</p>
 <p>Descuentos vigentes el día martes:{{descuento.martes}}</p>

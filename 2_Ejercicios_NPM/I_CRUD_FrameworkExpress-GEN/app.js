@@ -31,7 +31,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 /***************************AGREGACION DE VISTAS ACCESIBLES***********************/
 app.use('/', routes);
 app.use('/users', users);
-//Se agrega la vista definitivamente
+/*Se agrega la vista definitivamente. Y todo lo que inicie con /articulos queda
+ asociado a el, asi tenga mas extensiones*/
 app.use('/articulos', articulos);
 /**************************FIN DE AGREGACION DE VISTAS ACCESIBLES*******************/
 

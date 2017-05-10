@@ -34,7 +34,8 @@ app.controller('CtlLogIn', function ($scope, logInService) {
                 alert(response.usuario + " " + response.password);
                 /*Solo con limpiar el objeto se limpian todos los input 
                  * asociados*/
-                $scope.identificacion = "";
+                $scope.identificacion = "";                
+                window.location = "/sistema.html";
             });
         } else {
             alert("Verifique los datos ingresados");

@@ -3,14 +3,19 @@
 
 2. En el app.js se añade lo siguiente: 
     *Hacer el require var exphbs = require('express-handlebars');
-    * Se indica cual es el archivo de la master page
-        *app.engine('.hbs', exphbs({extname: '.hbs', defaultLayout: 'masterPage'}));
+    * Se indica cual es el archivo de la master page, y la carpeta de los partials
+        *app.engine('.hbs', exphbs(
+        {extname: '.hbs', 
+         defaultLayout: 'masterPage',
+         layoutsDir: __dirname + '/views/layouts/',
+         partialsDir: __dirname + '/views/partials/'}));
 
 3. Se pega la carpeta bower components con todo lo que ahi contiene, y la carpeta de 
    la raiz app.js
 
-4. Se crea la carpeta layout, con su archivo interno, ademas de la impementacion de dicho archivo. 
-   este es el archivo master page
+4. Se crea la carpeta layout y partials, con sus archivos internos, ademas de la 
+   implementacion de dicho archivo. este es el archivo master page con sus 
+   segmentos (Banner, menu, footer, etc.)
 
 5. Añadir los archivos estudiante.hbs y universidad.hbs
 

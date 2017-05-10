@@ -125,7 +125,7 @@ function grabarIntento(entrada, respuesta) {
     entrada.on('end', function () {
         var datos = querystring.parse(info);
         respuesta.writeHead(200, {'Content-Type': 'application/json'});
-        var object = {usuario: datos['usuario'], password: [datos['password']]};
+        var object = {usuario: datos['usuario'], password: datos['password']};
         /*Pasamos el objeto JSON a String*/
         object = JSON.stringify(object);
         /*Dicho String lo mandamos al cliente, y en el envio se vuelve a convertir

@@ -1,0 +1,11 @@
+1. Acceder al archivo APP.JS y tener muy encuenta lo siguiente
+    
+    * Cargar el archivo index.js y user.js (Ver los comentarios donde se carga)
+    * Asociar cada archivo a una peticion diferente por url (Ver los comentarios donde se asocian)
+
+2. Ir al archivo index.js de la carpeta routes, y tener encuenta lo siguiente
+    * Se define un objeto JSON, el cual se respondera a la pagina que se defina, 
+      dicho objeto sera interpretado por la pagina html-hbs y mostrara los datos
+
+3. Ir a view, archivo index y tener encuenta lo siguiente
+    * Se reciben los datos y se recorren, con un foreach

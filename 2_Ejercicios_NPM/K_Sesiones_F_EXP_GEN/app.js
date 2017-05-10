@@ -26,7 +26,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 /*Se inicializa el uso de las sesiones*/
-app.use(session({secret: '123456', resave: true, saveUninitialized: true}));
+app.use(session({secret: '123456', 
+    resave: true, saveUninitialized: true}));
 
 
 app.use('/', routes);

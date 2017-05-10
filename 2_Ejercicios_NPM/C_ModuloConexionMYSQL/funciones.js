@@ -7,7 +7,6 @@ var fs = require('fs');
 /*Variable que gestionara el servidor*/
 var servidor;
 /*Variabel que gestionara la conexion de la base de datos*/
-var conexion;
 //Con la libreria cargada, se tiene accceso a todos los tipos posibles de MIME, 
 //y no solo a los 6 que se habian especificado
 var mime = require('mime');

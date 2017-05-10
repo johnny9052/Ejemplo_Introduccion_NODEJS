@@ -1,0 +1,8 @@
+0. Modificar el app.js agregando: 
+    * Se añade el modulo de sesiones --> var session = require('express-session');
+    *Se inicializa el uso de las sesiones --> app.use(session({secret: '123456', resave: true, saveUninitialized: true}));
+
+1. Modificar el package.json, agregando la despendencia de "express-session": "^1.13.0"
+2. Modificar el index.hbs para la navegacion hacia login e ingresar al panel
+3. Implementar login.hbs para la identificacion de usuarios. 
+4. Implementar el index.js de routes para la peticion de todos los formularios

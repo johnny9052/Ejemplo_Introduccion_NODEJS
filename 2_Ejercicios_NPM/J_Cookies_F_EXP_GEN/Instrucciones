@@ -1,0 +1,10 @@
+
+1. En el archivo index.hbs crear un enlace que cargue el archivo login.hbs
+2. Hacer escuchar dicha peticion en el index.js de routes que se encargara de 
+   mostrar dicha pagina
+3. Creamos logIn.hbs para mostrar los datos de identiciacion y cargar la cookie
+   si ya h asido creada previamente, ademas desde este dormulario se envian los
+   datos a un servicio donde se creara la cookie
+4. En index.js se crea el servicio que se encargara de recibir los datos y crear 
+   las cookies, este las crea y muestra un mensaje que permite redireccionar al 
+   index
